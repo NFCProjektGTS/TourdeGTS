@@ -5,11 +5,18 @@ package gtsoffenbach.tourdegts.implementations;
  */
 public class Level {
     private String name;
+    private String raum;
+    private String info;
+    private String lehrer;
     private int levelnumber;
     private boolean unlocked;
 
-    Level(String name, int level, boolean unlocked) {
+
+    Level(String name,String info,String raum,String lehrer, int level, boolean unlocked) {
         this.name = name;
+        this.info = info;
+        this.raum = raum;
+        this.lehrer = lehrer;
         this.levelnumber = level;
         this.unlocked = unlocked;
     }
@@ -36,5 +43,15 @@ public class Level {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getRaum(){
+        return raum;
+    }
+    public String getInfo(){
+        return info;
+    }
+    public String getLehrer(){
+        return lehrer;
     }
 }

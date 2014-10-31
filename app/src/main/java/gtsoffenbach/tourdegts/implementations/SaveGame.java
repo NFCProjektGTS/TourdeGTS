@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by Noli on 02.09.2014.
@@ -13,7 +14,8 @@ import java.io.IOException;
 public class SaveGame {
     public static final String path = "secretfile.secret";
     public static boolean newGame = true;
-    public static Level[] levels = new Level[]{new Level("Armageddon 1", 0, false), new Level("Armageddon 2", 1, false), new Level("Armageddon 3", 2, false)};
+
+    public static Level[] levels = LevelList.getLevels();
     private Context caller;
     private FileOutputStream fos;
     private FileInputStream fis;
@@ -85,7 +87,6 @@ public class SaveGame {
                 sb.append(levels[i].getLevelnumber()).append(",").append(levels[i].isUnlocked() ? 1 : 0).append("#");
             }
         }
-
         try {
             //File f = new File(path);
             //f.delete();
