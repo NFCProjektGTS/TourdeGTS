@@ -22,8 +22,8 @@ public class LoadingScreen extends Screen {
         Assets.menu = g.newImage("mainmenu.png", ImageFormat.RGB565);
         Assets.background = g.newImage("gamescreen.png", ImageFormat.RGB565);
 
-        Assets.locked = g.newImage("locked.png", ImageFormat.RGB565);
-        Assets.unlocked = g.newImage("unlocked.png", ImageFormat.RGB565);
+        Assets.lock = g.newImage("lock.png", ImageFormat.RGB565);
+        Assets.infobox = g.newImage("infobox.png", ImageFormat.RGB565);
         Assets.button = g.newImage("button.png", ImageFormat.RGB565);
         Assets.button_pressed = g.newImage("button_pressed.png", ImageFormat.RGB565);
         Assets.chest = new Image[]{g.newImage("chest/chest001.png", ImageFormat.RGB565), g.newImage("chest/chest002.png", ImageFormat.RGB565), g.newImage("chest/chest003.png", ImageFormat.RGB565), g.newImage("chest/chest004.png", ImageFormat.RGB565), g.newImage("chest/chest005.png", ImageFormat.RGB565), g.newImage("chest/chest006.png", ImageFormat.RGB565), g.newImage("chest/chest007.png", ImageFormat.RGB565), g.newImage("chest/chest008.png", ImageFormat.RGB565), g.newImage("chest/chest009.png", ImageFormat.RGB565), g.newImage("chest/chest010.png", ImageFormat.RGB565), g.newImage("chest/chest011.png", ImageFormat.RGB565), g.newImage("chest/chest012.png", ImageFormat.RGB565)};

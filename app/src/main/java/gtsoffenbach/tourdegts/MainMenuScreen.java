@@ -9,6 +9,7 @@ import gtsoffenbach.tourdegts.gameinterface.Game;
 import gtsoffenbach.tourdegts.gameinterface.Graphics;
 import gtsoffenbach.tourdegts.gameinterface.Input;
 import gtsoffenbach.tourdegts.gameinterface.Screen;
+import gtsoffenbach.tourdegts.implementations.AndroidGame;
 import gtsoffenbach.tourdegts.implementations.SaveGame;
 
 /**
@@ -24,14 +25,14 @@ public class MainMenuScreen extends Screen {
     public MainMenuScreen(Game game) {
         super(game);
         container = new ElementContainer(this, true);
-        button_start = new UIButton(container, 104, 479) {
+        button_start = new UIButton(container, AndroidGame.width/2-Assets.button.getWidth()/2, 500) {
             @Override
             public void Click() {
                 super.Click();
                 goToScreenGame();
             }
         };
-        button_help = new UIButton(container, 104, 689) {
+        button_help = new UIButton(container,AndroidGame.width/2-Assets.button.getWidth()/2,715) {
             @Override
             public void Click() {
                 super.Click();
@@ -39,7 +40,7 @@ public class MainMenuScreen extends Screen {
             }
         };
 
-        button_settings = new UIButton(container, 104, 899) {
+        button_settings = new UIButton(container, AndroidGame.width/2-Assets.button.getWidth()/2, 930) {
             @Override
             public void Click() {
                 super.Click();
@@ -58,9 +59,9 @@ public class MainMenuScreen extends Screen {
             start_str = "Spiel fortsetzen";
         }
 
-        start = new BlinkingText(button_start, 0, 0, start_str, 75, Color.WHITE, 1);
-        help = new BlinkingText(button_help, 0, 0, "Hilfe", 75, Color.WHITE, 1);
-        settings = new BlinkingText(button_settings, 0, 0, "Einstellungen", 75, Color.WHITE, 1);
+        start = new BlinkingText(button_start, 0, 0, start_str, 75, Color.BLACK, 1);
+        help = new BlinkingText(button_help, 0, 0, "Hilfe", 75, Color.BLACK, 1);
+        settings = new BlinkingText(button_settings, 0,0, "Einstellungen", 75, Color.BLACK, 1);
 
     }
 

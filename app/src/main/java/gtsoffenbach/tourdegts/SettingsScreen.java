@@ -8,6 +8,7 @@ import gtsoffenbach.tourdegts.gameinterface.Game;
 import gtsoffenbach.tourdegts.gameinterface.Graphics;
 import gtsoffenbach.tourdegts.gameinterface.Input;
 import gtsoffenbach.tourdegts.gameinterface.Screen;
+import gtsoffenbach.tourdegts.implementations.AndroidGame;
 
 /**
  * Created by Kern on 04.09.2014.
@@ -19,14 +20,14 @@ public class SettingsScreen extends Screen {
     public SettingsScreen(final Game game) {
         super(game);
         container = new ElementContainer(this, true);
-        button_back = new UIButton(container, 104, 479) {
+        button_back = new UIButton(container, AndroidGame.width/2-Assets.button.getWidth()/2, AndroidGame.height-200) {
             @Override
             public void Click() {
                 super.Click();
                 goToScreenMenu();
             }
         };
-        button_reset = new UIButton(container, 104, 689) {
+        button_reset = new UIButton(container, AndroidGame.width/2-Assets.button.getWidth()/2, AndroidGame.height-400) {
             @Override
             public void Click() {
                 super.Click();
@@ -36,7 +37,8 @@ public class SettingsScreen extends Screen {
                 //game.getSave().setNewGame(true);
             }
         };
-        new BlinkingText(button_reset, 0, 0, "Spiel zurücksetzen", 70, Color.WHITE, 1);
+        new BlinkingText(button_reset, 0, 0, "Spiel zurücksetzen", 70, Color.BLACK, 1);
+        new BlinkingText(button_back, 0, 0, "Zurück", 70, Color.BLACK, 1);
     }
 
     private void goToScreenMenu() {

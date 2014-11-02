@@ -1,29 +1,37 @@
 package gtsoffenbach.tourdegts;
 
+import android.graphics.Color;
+
 import java.util.List;
 
 import gtsoffenbach.tourdegts.gameinterface.Game;
 import gtsoffenbach.tourdegts.gameinterface.Graphics;
 import gtsoffenbach.tourdegts.gameinterface.Input;
 import gtsoffenbach.tourdegts.gameinterface.Screen;
+import gtsoffenbach.tourdegts.implementations.AndroidGame;
 
 /**
  * Created by Kern on 04.09.2014.
  */
 public class HelpScreen extends Screen {
     private ElementContainer container;
-    private UIElement button_back;
+    private UIElement backbutton;
+    private BlinkingText backtext;
 
     public HelpScreen(Game game) {
         super(game);
+
         container = new ElementContainer(this, true);
-        button_back = new UIButton(container, 104, 479) {
+
+        backbutton = new UIButton(container, AndroidGame.width/2-Assets.button.getWidth()/2, AndroidGame.height-200) {
             @Override
             public void Click() {
                 super.Click();
                 goToScreenMenu();
             }
         };
+        backbutton.setGraphics(game.getGraphics());
+        backtext = new BlinkingText(backbutton, 0, 0, "Zurück", 50, Color.BLACK, 1);
     }
 
     private void goToScreenMenu() {
@@ -45,9 +53,11 @@ public class HelpScreen extends Screen {
 
     @Override
     public void paint(float deltaTime) {
+        backtext.update(deltaTime);
         Graphics g = game.getGraphics();
         g.drawImage(Assets.helpBackground, 0, 0);
         container.updateAll(deltaTime, g);
+
     }
 
     @Override

@@ -28,10 +28,9 @@ public class GameScreen extends Screen {
     private Image currentSprite;
     //private Animation chest_anim;
     //private ArrayList tilearray = new ArrayList();
-    private BlinkingText text;
+    private BlinkingText unlocktext,gotoProgresstext;
     private ElementContainer container;
-    private UIButton firstbutton;
-    private UIButton progressScreen;
+    private UIButton unlockbutton,gotoProgressButton;
     private int currentLevel;
     private BlinkingText blink;
 
@@ -69,66 +68,41 @@ public class GameScreen extends Screen {
         //currentSprite = chest_anim.getImage();
 
         container = new ElementContainer(this, true);
-        firstbutton = new UIButton(container, (AndroidGame.width - Assets.button.getWidth()) / 2, AndroidGame.height - Assets.button.getHeight()) {
+        unlockbutton = new UIButton(container, (AndroidGame.width - Assets.button.getWidth()) / 2, AndroidGame.height - Assets.button.getHeight()-300) {
             @Override
             public void Click() {
                 super.Click();
                 for (int i = 0; i < SaveGame.levels.length; i++) {
                     SaveGame.levels[i].setUnlocked(true);
                 }
-                //LevelUnlock.unlock(game, 2);
             }
         };
-        firstbutton.setGraphics(game.getGraphics());
-        //UIButton second = new UIButton(container, 100, 100);
-        //UIButton third = new UIButton(container, 130, 130);
-        //UIButton fourth = new UIButton(container, 160, 160);
-
-
-        blink = new BlinkingText(new UIElement(container, AndroidGame.width / 2, AndroidGame.height / 2, 2, 2), 2, 2, "Level: " + currentLevel, 80, Color.MAGENTA, 1);
-
-
-        progressScreen = new UIButton(container, 600, 10) {
+        unlockbutton.setGraphics(game.getGraphics());
+        gotoProgressButton = new UIButton(container, (AndroidGame.width - Assets.button.getWidth()) / 2, AndroidGame.height - Assets.button.getHeight()-100) {
             @Override
             public void Click() {
                 super.Click();
                 game.setScreen(new ProgressScreen(game, currentLevel, currentLevel));
             }
-
-
-            @Override
-            public void draw(float delta) {
-                if (isPressed()) {
-                    //getGraphics().drawImage(Assets.button,getRectangle().left,getRectangle().top, 0, 0,getRectangle().width(),getRectangle().height());
-                    //getGraphics().drawImage(Assets.button,getRectangle().left,getRectangle().top, getRectangle().width(), getRectangle().height() );
-                    getGraphics().drawImage(Assets.button_small, getRectangle().left, getRectangle().top);
-                } else {
-                    //getGraphics().drawImage(Assets.button_pressed,getRectangle().left,getRectangle().top, 0, 0,getRectangle().width(),getRectangle().height());
-                    getGraphics().drawImage(Assets.button_small_pressed, getRectangle().left, getRectangle().top);
-                }
-            }
-
         };
+        gotoProgressButton.setGraphics(game.getGraphics());
+
+
+
+        blink = new BlinkingText(new UIElement(container, AndroidGame.width / 2, AndroidGame.height -50, 2, 2), 2, 2, "Level: " + currentLevel, 80, Color.MAGENTA, 1);
+
+
 
         //container.addElement(firstbutton);
 
         //game.getGraphics().drawString("Tap to Start.", 400, 240, paint);
-        text = new BlinkingText(firstbutton, 0, 0, "Samplebutton", 50, Color.WHITE, 1);
-
+        unlocktext = new BlinkingText(unlockbutton, 0, 0, "Alles Freischalten", 50, Color.BLACK, 1);
+        gotoProgresstext = new BlinkingText(gotoProgressButton, 0, 0, "Fortschritt", 50, Color.BLACK, 1);
         //UIElement chest_container = new UIElement(container, AndroidGame.width / 2 - Assets.chest[0].getWidth() / 2, 10, Assets.chest[0].getWidth(), Assets.chest[0].getHeight());
         //Chest chest = new Chest(chest_container, chest_container.getRectangle().right, chest_container.getRectangle().bottom, 150, 5000);
         state = GameState.Running;
     }
 
-    public static Background getBg1() {
-        // TODO Auto-generated method stub
-        return bg1;
-    }
-
-    public static Background getBg2() {
-        // TODO Auto-generated method stub
-        return bg2;
-    }
 
     @Override
     public void update(float deltaTime) {
@@ -210,23 +184,11 @@ public class GameScreen extends Screen {
         Graphics g = game.getGraphics();
 
         g.drawImage(Assets.background, bg1.getBgX(), bg1.getBgY());
-        g.drawImage(Assets.background, bg2.getBgX(), bg2.getBgY());
 
 
-        text.update(deltaTime);
+        gotoProgresstext.update(deltaTime);
+        unlocktext.update(deltaTime);
 
-        // First draw the game elements.
-
-        // Example:
-        // g.drawImage(Assets.background, 0, 0);
-        // g.drawImage(Assets.character, characterX, characterY);
-
-        // Secondly, draw the UI above the game elements.
-        /*if (state == GameState.Ready)
-            drawReadyUI();
-
-        if (state == GameState.Paused)
-            drawPausedUI();*/
         if (state == GameState.Running)
             drawRunningUI(deltaTime);
 
@@ -253,13 +215,6 @@ public class GameScreen extends Screen {
 
     }
 
-    private void drawReadyUI() {
-        Graphics g = game.getGraphics();
-
-        g.drawARGB(155, 0, 0, 0);
-        g.drawString("Tap to Start.", 400, 240, paint);
-
-    }
 
     private void drawRunningUI(float deltaTime) {
         Graphics g = game.getGraphics();
