@@ -1,5 +1,7 @@
 package gtsoffenbach.tourdegts;
 
+import android.graphics.Typeface;
+
 import gtsoffenbach.tourdegts.gameinterface.Game;
 import gtsoffenbach.tourdegts.gameinterface.Graphics;
 import gtsoffenbach.tourdegts.gameinterface.Graphics.ImageFormat;
@@ -33,6 +35,7 @@ public class LoadingScreen extends Screen {
         Assets.settingsBackground = g.newImage("settingsscreen.png", ImageFormat.RGB565);
         Assets.button_small = g.newImage("button_small.png", ImageFormat.RGB565);
         Assets.button_small_pressed = g.newImage("button_small_pressed.png", ImageFormat.RGB565);
+
 
 
         //This is how you would load a sound if you had one.

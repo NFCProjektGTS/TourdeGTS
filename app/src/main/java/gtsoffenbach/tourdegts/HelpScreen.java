@@ -31,7 +31,7 @@ public class HelpScreen extends Screen {
             }
         };
         backbutton.setGraphics(game.getGraphics());
-        backtext = new BlinkingText(backbutton, 0, 0, "Zurück", 50, Color.BLACK, 1);
+        backtext = new BlinkingText(backbutton, 0, 0, "Zurück", 50, Color.BLACK, 1,Assets.lobster);
     }
 
     private void goToScreenMenu() {

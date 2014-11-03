@@ -1,6 +1,8 @@
 package gtsoffenbach.tourdegts;
 
+import android.app.Activity;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 
 /**
  * Created by Noli on 28.08.2014.
@@ -13,15 +15,18 @@ public class BlinkingText extends Element {
     private double speed;
     private UIElement dad;
     private int size;
+    private Typeface font;
 
 
-    BlinkingText(UIElement father, int sx, int sy, String msg, int size, int color, double speed) {
+    BlinkingText(UIElement father, int sx, int sy, String msg, int size, int color, double speed, Typeface font) {
         super(father, sx, sy);
         dad = father;
         this.size = size;
         this.speed = speed;
         this.msg = msg;
+        this.font = font;
         paint = new Paint();
+        paint.setTypeface(font);
         paint.setTextSize(size);
         paint.setTextAlign(Paint.Align.CENTER); //no parameter yet
         paint.setAntiAlias(true);
