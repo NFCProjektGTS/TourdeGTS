@@ -35,6 +35,7 @@ public class LoadingScreen extends Screen {
         Assets.settingsBackground = g.newImage("settingsscreen.png", ImageFormat.RGB565);
         Assets.button_small = g.newImage("button_small.png", ImageFormat.RGB565);
         Assets.button_small_pressed = g.newImage("button_small_pressed.png", ImageFormat.RGB565);
+        Assets.progressbar = g.newImage("progessbar.png",ImageFormat.RGB565);
 
 
 

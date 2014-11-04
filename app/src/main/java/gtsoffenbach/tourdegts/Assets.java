@@ -13,7 +13,7 @@ import gtsoffenbach.tourdegts.implementations.AndroidGame;
  */
 public class Assets {
 
-    public static Image menu, splash, background, settingsBackground, helpBackground, progressBackground, infobox,lock;
+    public static Image menu, splash, background, settingsBackground, helpBackground, progressBackground, infobox,lock,progressbar;
     public static Image[] chest, chest_half;
     public static Image button, button_pressed, button_small, button_small_pressed;
     public static Sound click, magic; //magic is a sound played when UI element is spawned with cool effect

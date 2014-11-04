@@ -29,6 +29,7 @@ public class GameScreen extends Screen {
     //private Animation chest_anim;
     //private ArrayList tilearray = new ArrayList();
     private BlinkingText unlocktext,gotoProgresstext;
+    private UIProgressbar gameprogressbar;
     private ElementContainer container;
     private UIButton unlockbutton,gotoProgressButton;
     private int currentLevel;
@@ -86,8 +87,8 @@ public class GameScreen extends Screen {
             }
         };
         gotoProgressButton.setGraphics(game.getGraphics());
-
-
+        gameprogressbar = new UIProgressbar(container,(AndroidGame.width - Assets.button.getWidth()) / 2,AndroidGame.height - Assets.button.getHeight()-500,40,new int[0]);
+        gameprogressbar.setGraphics(game.getGraphics());
 
         blink = new BlinkingText(new UIElement(container, AndroidGame.width / 2, AndroidGame.height -50, 2, 2), 2, 2, "Level: " + currentLevel, 80, Color.MAGENTA, 1, Assets.standard);
 
