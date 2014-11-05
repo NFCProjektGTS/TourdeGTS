@@ -76,6 +76,8 @@ public class GameScreen extends Screen {
                 for (int i = 0; i < SaveGame.levels.length; i++) {
                     SaveGame.levels[i].setUnlocked(true);
                 }
+                int a = (int)(Math.random()*100);
+                gameprogressbar.setProgress(a);
             }
         };
         unlockbutton.setGraphics(game.getGraphics());
