@@ -14,6 +14,7 @@ import gtsoffenbach.tourdegts.gameinterface.Input.TouchEvent;
 import gtsoffenbach.tourdegts.gameinterface.Screen;
 import gtsoffenbach.tourdegts.implementations.AndroidGame;
 import gtsoffenbach.tourdegts.implementations.SaveGame;
+import gtsoffenbach.tourdegts.minigame_math.MathGameScreen;
 
 /**
  * Created by Noli on 05.08.2014.
@@ -23,7 +24,6 @@ public class GameScreen extends Screen {
     GameState state = GameState.Ready;
 
     // Variable Setup
-    int livesLeft = 1;
     Paint paint, paint2, paint3;
     private Image currentSprite;
     //private Animation chest_anim;
@@ -85,7 +85,8 @@ public class GameScreen extends Screen {
             @Override
             public void Click() {
                 super.Click();
-                game.setScreen(new ProgressScreen(game, currentLevel, currentLevel));
+                game.setScreen(new MathGameScreen(game));
+                //TODO REDO game.setScreen(new ProgressScreen(game, currentLevel, currentLevel));
             }
         };
         gotoProgressButton.setGraphics(game.getGraphics());

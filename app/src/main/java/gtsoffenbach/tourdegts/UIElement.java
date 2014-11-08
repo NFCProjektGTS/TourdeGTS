@@ -20,7 +20,7 @@ public class UIElement {
     private Graphics graphics;
     private boolean pressed = true;
 
-    UIElement(final ElementContainer container, final int dx, final int dy, final int sx, final int sy) {
+    public UIElement(final ElementContainer container, final int dx, final int dy, final int sx, final int sy) {
         this.rectangle = new Rect(dx, dy, sx, sy);
         this.container = container;
         this.container.addElement(this);

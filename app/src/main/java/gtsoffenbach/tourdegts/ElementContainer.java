@@ -14,7 +14,7 @@ public class ElementContainer {
     private Screen screen;
     private boolean enabled;
 
-    ElementContainer(Screen screen, boolean visible) {
+    public ElementContainer(Screen screen, boolean visible) {
         this.screen = screen;
         enabled = true;
     }

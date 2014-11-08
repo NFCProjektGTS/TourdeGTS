@@ -18,7 +18,7 @@ public class BlinkingText extends Element {
     private Typeface font;
 
 
-    BlinkingText(UIElement father, int sx, int sy, String msg, int size, int color, double speed, Typeface font) {
+    public BlinkingText(UIElement father, int sx, int sy, String msg, int size, int color, double speed, Typeface font) {
         super(father, sx, sy);
         dad = father;
         this.size = size;
