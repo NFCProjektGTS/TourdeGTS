@@ -4,6 +4,7 @@ import android.graphics.Color;
 
 import gtsoffenbach.tourdegts.Assets;
 import gtsoffenbach.tourdegts.BlinkingText;
+import gtsoffenbach.tourdegts.Colors;
 import gtsoffenbach.tourdegts.ElementContainer;
 import gtsoffenbach.tourdegts.UIElement;
 
@@ -13,12 +14,20 @@ import gtsoffenbach.tourdegts.UIElement;
 class UIButton extends UIElement {
 
     private String text;
+    private int color;
     private BlinkingText msg;
-    UIButton(final ElementContainer container, final int dx, final int dy, final int sx, final int sy,String text) {
+    private int dx,dy,sx,sy;
+    UIButton(ElementContainer container, final int dx, final int dy, final int sx, final int sy,String text,int color) {
         super(container, dx, dy, sx, sy);
+        this.dx=dx;
+        this.dy=dy;
+        this.sx=sx;
+        this.sy=sy;
         this.text=text;
-        msg = new BlinkingText(this, 0, 0, text, 100, Color.BLACK, 1,Assets.lobster);
+        this.color=color;
+        msg = new BlinkingText(this,0, +30, text, 150, Colors.BLACK, 1,Assets.lobster);
     }
+
     void setText(String textmsg){
         msg.setMsg(textmsg);
     }
@@ -29,19 +38,15 @@ class UIButton extends UIElement {
     @Override
     public void draw(float delta) {
         if (isPressed()) {
-            //getGraphics().drawImage(Assets.button,getRectangle().left,getRectangle().top, 0, 0,getRectangle().width(),getRectangle().height());
-            //getGraphics().drawImage(Assets.button,getRectangle().left,getRectangle().top, getRectangle().width(), getRectangle().height() );
-            getGraphics().drawImage(Assets.button, getRectangle().left, getRectangle().top); //TODO change image
+            getGraphics().drawRect(dx,dy,sx,sy,color);
         } else {
-            //getGraphics().drawImage(Assets.button_pressed,getRectangle().left,getRectangle().top, 0, 0,getRectangle().width(),getRectangle().height());
-            getGraphics().drawImage(Assets.button_pressed, getRectangle().left, getRectangle().top);
+            getGraphics().drawRect(dx,dy,sx,sy,color+40);
         }
     }
 
     @Override
     public void Click() {
         Assets.click.play(1f);
-        //getContainer().remove(1); Button click to remove other button :D
 
     }
 }

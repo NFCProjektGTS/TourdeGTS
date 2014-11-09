@@ -11,7 +11,7 @@ public class UIButton extends UIElement {
 
     }
 
-    UIButton(final ElementContainer container, final int dx, final int dy) {
+    public UIButton(final ElementContainer container, final int dx, final int dy) {
         super(container, dx, dy, Assets.button.getWidth(), Assets.button.getHeight());
     }
 

@@ -15,6 +15,7 @@ public class BlinkingText extends Element {
     private double speed;
     private UIElement dad;
     private int size;
+    private int color;
     private Typeface font;
 
 
@@ -25,6 +26,7 @@ public class BlinkingText extends Element {
         this.speed = speed;
         this.msg = msg;
         this.font = font;
+        this.color = color;
         paint = new Paint();
         paint.setTypeface(font);
         paint.setTextSize(size);
@@ -36,6 +38,10 @@ public class BlinkingText extends Element {
 
     }
 
+    public void setColor(int color) {
+        this.color = color;
+        paint.setColor(color);
+    }
 
     public Paint getPaint() {
         return paint;

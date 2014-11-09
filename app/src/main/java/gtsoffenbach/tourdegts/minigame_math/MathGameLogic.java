@@ -1,5 +1,7 @@
 package gtsoffenbach.tourdegts.minigame_math;
 
+import java.util.ArrayList;
+
 import gtsoffenbach.tourdegts.Background;
 import gtsoffenbach.tourdegts.gameinterface.Game;
 
@@ -10,14 +12,14 @@ public class MathGameLogic {
     Game game;
     MathGameScreen father;
     float startTimer,gameTimer;
-
+    ArrayList<Boolean> results= new ArrayList<Boolean>();
     boolean isRunning,isStarting,isEnded;
 
     MathGameLogic(Game game,MathGameScreen gameScreen){
         this.game = game;
-        startTimer= 100;
-        gameTimer= 6000;
-        gameScreen=father;
+        startTimer= 600;
+        gameTimer= 3000;
+        isEnded=false;
         isRunning= false;
         isStarting=true;
     }
@@ -55,6 +57,8 @@ public class MathGameLogic {
                 number2 = (int) (Math.random() * 100);
                 if(number2>number1){
                     ok=false;
+                }else if(number1%10==0||number2%10==0){
+                    ok=false;
                 }else{
                     ok=true;
                 }
@@ -65,8 +69,7 @@ public class MathGameLogic {
 
 
 
-        int rr=(int)(Math.random()*3);
-        System.out.println(rr+"");
+        int rr=(int)(Math.random()*4);
         boolean ok=false;
         switch (rr){
             case 0:
@@ -80,8 +83,10 @@ public class MathGameLogic {
                     result2=result0+(((int)(Math.random()*38))-19);
                     result3=result0+(((int)(Math.random()*38))-19);
 
-                    if(result1!=result0||result2!=result0||result3!=result0||result1!=result2||result1!=result3||result2!=result3){
-                       ok=true;
+                    if(result1==result0||result2==result0||result3==result0||result1==result2||result1==result3||result2==result3){
+                        ok=false;
+                    }else{
+                        ok=true;
                     }
 
                 }
@@ -97,7 +102,9 @@ public class MathGameLogic {
                     result2=result1+(((int)(Math.random()*38))-19);
                     result3=result1+(((int)(Math.random()*38))-19);
 
-                    if(result1!=result0||result2!=result0||result3!=result0||result1!=result2||result1!=result3||result2!=result3){
+                    if(result1==result0||result2==result0||result3==result0||result1==result2||result1==result3||result2==result3){
+                        ok=false;
+                    }else{
                         ok=true;
                     }
                 }
@@ -113,7 +120,9 @@ public class MathGameLogic {
                     result1=result2+(((int)(Math.random()*38))-19);
                     result3=result2+(((int)(Math.random()*38))-19);
 
-                    if(result1!=result0||result2!=result0||result3!=result0||result1!=result2||result1!=result3||result2!=result3){
+                    if(result1==result0||result2==result0||result3==result0||result1==result2||result1==result3||result2==result3){
+                        ok=false;
+                    }else{
                         ok=true;
                     }
                 }
@@ -129,7 +138,9 @@ public class MathGameLogic {
                     result2=result3+(((int)(Math.random()*38))-19);
                     result1=result3+(((int)(Math.random()*38))-19);
 
-                    if(result1!=result0||result2!=result0||result3!=result0||result1!=result2||result1!=result3||result2!=result3){
+                    if(result1==result0||result2==result0||result3==result0||result1==result2||result1==result3||result2==result3){
+                        ok=false;
+                    }else{
                         ok=true;
                     }
                 }
@@ -167,5 +178,12 @@ public class MathGameLogic {
     }
     public float getGameTimer(){
         return gameTimer;
+    }
+
+    public void addResult(boolean antwort){
+        results.add(antwort);
+    }
+    public ArrayList<Boolean> getResults() {
+        return results;
     }
 }
