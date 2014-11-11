@@ -2,15 +2,17 @@ package gtsoffenbach.tourdegts.ContentScreens;
 
 import android.graphics.Color;
 
+import java.util.List;
+
 import gtsoffenbach.tourdegts.Assets;
 import gtsoffenbach.tourdegts.Background;
 import gtsoffenbach.tourdegts.BlinkingText;
 import gtsoffenbach.tourdegts.ElementContainer;
 import gtsoffenbach.tourdegts.GameScreen;
 import gtsoffenbach.tourdegts.UIButton;
-import gtsoffenbach.tourdegts.UIElement;
 import gtsoffenbach.tourdegts.gameinterface.Game;
 import gtsoffenbach.tourdegts.gameinterface.Graphics;
+import gtsoffenbach.tourdegts.gameinterface.Input;
 import gtsoffenbach.tourdegts.gameinterface.Screen;
 import gtsoffenbach.tourdegts.implementations.AndroidGame;
 
@@ -26,44 +28,67 @@ public class WelcomeScreen extends Screen {
     private BlinkingText welcometext;
     private ElementContainer container;
     private UIButton goButton;
-    private UIElement element;
+    //private UIElement element;
 
     public WelcomeScreen(final Game game) {
         super(game);
         bg1 = new Background(0, 0);
-        bg2 = new Background(AndroidGame.width, 0);
         container = new ElementContainer(this, true);
-        element = new UIElement(container, 50, 50, 750, 100);
-        goButton = new UIButton(container, (AndroidGame.width - Assets.button.getWidth()) / 2, AndroidGame.height - Assets.button.getHeight() - 100) {
+        //element = new UIElement(container, 0, 0, 0, 0);
+        goButton = new UIButton(container, (AndroidGame.width - Assets.button.getWidth()) / 2, AndroidGame.height - Assets.button.getHeight() - 300) {
+
             @Override
             public void Click() {
                 super.Click();
-                for (int i = 255; i > 0; i--) {
-                    game.getGraphics().drawARGB(i, 0, 0, 0);
-                    game.setScreen(new GameScreen(game, 0)); //init first Level
-                }
+                //fadeOut();
+
+                game.setScreen(new GameScreen(game, 0)); //init first Level
+                game.getSave().save();
             }
         };
+        goButton.setGraphics(game.getGraphics());
 
-        welcometext = new BlinkingText(element, 750, 1000, "Herzlich Wilkommen zur 'Tour de GTS'", 22, Color.RED, 1);
+        welcometext = new BlinkingText(goButton, 0, 0, "Herzlich Wilkommen zur 'Tour de GTS'", 22, Color.parseColor("#324C95"), 1, Assets.lobster);
     }
 
     @Override
     public void update(float deltaTime) {
-        Graphics g = game.getGraphics();
-        container.updateAll(deltaTime, g);
+
+
+        List<Input.TouchEvent> touchEvents = game.getInput().getTouchEvents();
+
+        int len = touchEvents.size();
+        for (int i = 0; i < len; i++) {
+            Input.TouchEvent event = touchEvents.get(i);
+            container.processClick(event);
+        }
     }
 
     @Override
     public void paint(float deltaTime) {
         Graphics g = game.getGraphics();
-
         g.drawImage(Assets.background, bg1.getBgX(), bg1.getBgY());
+
+
+        container.updateAll(deltaTime, g);
     }
 
     @Override
     public void pause() {
 
+    }
+
+
+    public void fadeIn() {
+        for (int i = 255; i > 0; i--) {
+            game.getGraphics().drawARGB(i, 0, 0, 0);
+        }
+    }
+
+    public void fadeOut() {
+        for (int i = 0; i > 255; i++) {
+            game.getGraphics().drawARGB(i, 0, 0, 0);
+        }
     }
 
     @Override

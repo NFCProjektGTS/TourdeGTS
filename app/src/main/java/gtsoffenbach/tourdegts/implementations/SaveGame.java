@@ -42,8 +42,8 @@ public class SaveGame {
             fis = caller.openFileInput(path);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            newGame = true;
             save();
+            newGame = true;
             return;
         }
 
@@ -103,6 +103,7 @@ public class SaveGame {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        newGame = false;
 
     }
 
