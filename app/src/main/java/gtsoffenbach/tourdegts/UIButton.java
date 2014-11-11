@@ -21,7 +21,8 @@ public class UIButton extends UIElement {
             //getGraphics().drawImage(Assets.button,getRectangle().left,getRectangle().top, 0, 0,getRectangle().width(),getRectangle().height());
             //getGraphics().drawImage(Assets.button,getRectangle().left,getRectangle().top, getRectangle().width(), getRectangle().height() );
             getGraphics().drawImage(Assets.button, getRectangle().left, getRectangle().top);
-        } else {
+        }
+        if (!isPressed() || !isEnabled()) {
             //getGraphics().drawImage(Assets.button_pressed,getRectangle().left,getRectangle().top, 0, 0,getRectangle().width(),getRectangle().height());
             getGraphics().drawImage(Assets.button_pressed, getRectangle().left, getRectangle().top);
         }

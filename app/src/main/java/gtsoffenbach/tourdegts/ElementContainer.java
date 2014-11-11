@@ -54,6 +54,8 @@ public class ElementContainer {
                 if (Utils.inBounds(event, element.getRectangle())) {
                     element.onClick(event);
                     break;
+                } else {
+                    element.setPressed(true);
                 }
             }
         }

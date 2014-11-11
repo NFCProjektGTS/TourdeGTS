@@ -133,6 +133,10 @@ public class UIElement {
                         pressed = false;
 
                     }
+                    if (event.type == Input.TouchEvent.TOUCH_DRAGGED) {
+
+
+                    }
 
                 }
             }
