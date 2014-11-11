@@ -15,7 +15,7 @@ public class BlinkingText extends Element {
     private int size;
 
 
-    BlinkingText(UIElement father, int sx, int sy, String msg, int size, int color, double speed) {
+    public BlinkingText(UIElement father, int sx, int sy, String msg, int size, int color, double speed) {
         super(father, sx, sy);
         dad = father;
         this.size = size;

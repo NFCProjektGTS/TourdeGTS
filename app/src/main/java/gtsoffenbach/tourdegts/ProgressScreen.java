@@ -34,6 +34,7 @@ public class ProgressScreen extends Screen {
     private int mult = 1;
     private int offset = 110;
     private String indicatorString, inverseindiString;
+    private int wasdragged = 0;
 
     public ProgressScreen(final Game game, int lastlevel, int seleted) { //NEED SELECTED LEVEL
         super(game);
@@ -100,6 +101,7 @@ public class ProgressScreen extends Screen {
             }
         }
 //this.flip = new Point((AndroidGame.width-buttons[0].getRectangle().right)/2,(AndroidGame.height/2)); // Left Point of our main Element, + rect.right; for the right Point of our main Element
+        updatePosZero(0);
     }
 
     public int getSelectedLevel() {
@@ -181,13 +183,18 @@ public class ProgressScreen extends Screen {
         List<Input.TouchEvent> touchEvents = game.getInput().getTouchEvents();
         if (!inMove && !locked) {
             int len = touchEvents.size();
+
             for (int i = 0; i < len; i++) {
                 Input.TouchEvent event = touchEvents.get(i);
+
                 container.processClick(event);
                 if (event.type == Input.TouchEvent.TOUCH_DOWN) {
                     veryfirst = last = new Point(event.x, event.y);
+
                 }
                 if (event.type == Input.TouchEvent.TOUCH_DRAGGED) {
+                    wasdragged++;
+                    System.out.println(wasdragged);
                     now = new Point(event.x, event.y);
                     this.speed = (int) ((now.x - last.x));
                     for (int i2 = 0; i2 < buttons.size(); i2++) {
@@ -219,11 +226,15 @@ if (Math.abs(buttons[0].getRectangle().left) + (AndroidGame.width - buttons[0].g
                 }
                 if (event.type == Input.TouchEvent.TOUCH_UP) {
 
+                    if (wasdragged < 6) {
                     if (event.x > 150 && event.x < 650 && event.y < 900 && event.y > 300) { //TODO NOTLÖSUNG?
+
                         if (SaveGame.levels[selectedLevel].isUnlocked()) {
                             game.setScreen(new GameScreen(game, selectedLevel));
                         }
                     }
+                    }
+                    wasdragged = 0;
 
                     inMove = true;
                     int dist = (veryfirst.x - event.x);
@@ -269,9 +280,9 @@ if (Math.abs(buttons[0].getRectangle().left) + (AndroidGame.width - buttons[0].g
                     }
                 }
             }
-        } else {
+        } //else {
             updatePosZero(deltaTime);
-        }
+        //}
     }
 
     private void updatePosZero(float deltaTime) {

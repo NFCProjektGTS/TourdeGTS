@@ -38,6 +38,7 @@ public class GameScreen extends Screen {
         super(game);
         this.currentLevel = level;
 
+
         // Initialize game objects here
 
         bg1 = new Background(0, 0);
@@ -75,6 +76,8 @@ public class GameScreen extends Screen {
                 for (int i = 0; i < SaveGame.levels.length; i++) {
                     SaveGame.levels[i].setUnlocked(true);
                 }
+                game.getSave().save();
+                SaveGame.newGame = false;   //außer in den einstellungen MUSS IMMER newGame false gesetzt werden nach dem speichern!!!
             }
         };
         unlockbutton.setGraphics(game.getGraphics());
@@ -83,6 +86,7 @@ public class GameScreen extends Screen {
             public void Click() {
                 super.Click();
                 game.setScreen(new ProgressScreen(game, currentLevel, currentLevel));
+
             }
         };
         gotoProgressButton.setGraphics(game.getGraphics());
@@ -191,7 +195,6 @@ public class GameScreen extends Screen {
 
         if (state == GameState.Running)
             drawRunningUI(deltaTime);
-
     }
 
     public void animate() {

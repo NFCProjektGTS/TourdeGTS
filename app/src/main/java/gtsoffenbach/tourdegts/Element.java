@@ -17,7 +17,7 @@ public class Element {
     private Graphics graphics;
     private boolean pressed = true;
 
-    Element(final UIElement father, final int sx, final int sy) {
+    public Element(final UIElement father, final int sx, final int sy) {
         this.father = father;
         this.father.add(this);
         this.graphics = father.getGraphics();

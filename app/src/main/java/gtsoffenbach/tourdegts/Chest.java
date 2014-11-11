@@ -10,7 +10,7 @@ public class Chest extends Element {
     private Animation chest_anim;
     private int speed, finalshow;
 
-    Chest(UIElement father, int sx, int sy, int speed, int finalshow) {
+    public Chest(UIElement father, int sx, int sy, int speed, int finalshow) {
         super(father, sx, sy);
         this.chest_anim = new Animation(false);
         this.speed = speed;

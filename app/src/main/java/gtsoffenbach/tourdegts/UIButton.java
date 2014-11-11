@@ -6,12 +6,12 @@ package gtsoffenbach.tourdegts;
 public class UIButton extends UIElement {
 
 
-    UIButton(final ElementContainer container, final int dx, final int dy, final int sx, final int sy) {
+    public UIButton(final ElementContainer container, final int dx, final int dy, final int sx, final int sy) {
         super(container, dx, dy, sx, sy);
 
     }
 
-    UIButton(final ElementContainer container, final int dx, final int dy) {
+    public UIButton(final ElementContainer container, final int dx, final int dy) {
         super(container, dx, dy, Assets.button.getWidth(), Assets.button.getHeight());
     }
 

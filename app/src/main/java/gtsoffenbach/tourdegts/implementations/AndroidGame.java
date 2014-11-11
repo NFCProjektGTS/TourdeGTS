@@ -29,7 +29,7 @@ public class AndroidGame extends Activity implements Game {
 
     public static final int width = 800;
     public static final int height = 1280;
-    public static final String TAG = "DroidGame";
+    public static final String TAG = "TourDeGts";
     GameFastRenderView renderView;
     Graphics graphics;
     Audio audio;

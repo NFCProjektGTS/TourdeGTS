@@ -6,7 +6,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Created by Noli on 02.09.2014.
@@ -66,12 +65,17 @@ public class SaveGame {
 
         content = fileContent.toString();
 
-        if (content != "" || content != null) {
+        if (content != "" && content != null) {
             //Load from file
             String[] parts = content.split("#");
             for (int i = 0; i < parts.length; i++) {
                 String[] set = parts[i].split(",");
-                levels[Integer.valueOf(set[0])].setUnlocked(set[1] == "1" ? true : false);
+                if (set[1].equals("1")) {
+                    levels[Integer.valueOf(set[0])].setUnlocked(true);
+                } else {
+                    levels[Integer.valueOf(set[0])].setUnlocked(false);
+                }
+                //levels[Integer.valueOf(set[0])].setUnlocked(set[1] == "1" ? true : false);
                 levels[Integer.valueOf(set[0])].setLevelnumber(Integer.valueOf(set[0]));
             }
         }
@@ -83,6 +87,7 @@ public class SaveGame {
         for (int i = 0; i < levels.length; i++) {
             if (i == levels.length - 1) {
                 sb.append(levels[i].getLevelnumber()).append(",").append(levels[i].isUnlocked() ? 1 : 0);
+                break;
             } else {
                 sb.append(levels[i].getLevelnumber()).append(",").append(levels[i].isUnlocked() ? 1 : 0).append("#");
             }
@@ -94,13 +99,14 @@ public class SaveGame {
             fos = caller.openFileOutput(path, Context.MODE_PRIVATE);
             fos.write(sb.toString().getBytes());
             fos.close();
+            //newGame = false;
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
-    public void delete() {
+    public void delete() {  //even more a reset
         for (int i = 0; i < SaveGame.levels.length; i++) {
             SaveGame.levels[i].setUnlocked(false);
         }

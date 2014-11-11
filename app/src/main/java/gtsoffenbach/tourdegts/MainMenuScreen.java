@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import gtsoffenbach.tourdegts.ContentScreens.WelcomeScreen;
 import gtsoffenbach.tourdegts.gameinterface.Game;
 import gtsoffenbach.tourdegts.gameinterface.Graphics;
 import gtsoffenbach.tourdegts.gameinterface.Input;
@@ -29,6 +30,7 @@ public class MainMenuScreen extends Screen {
             @Override
             public void Click() {
                 super.Click();
+
                 goToScreenGame();
             }
         };
@@ -74,7 +76,12 @@ public class MainMenuScreen extends Screen {
     }
 
     private void goToScreenGame() {
-        game.setScreen(new GameScreen(game, levelselected));
+
+        if (SaveGame.isNewGame()) {       //ADDED WELCOMESCREEN ON FIRST STARTUP
+            game.setScreen(new WelcomeScreen(game));
+        } else {
+            game.setScreen(new GameScreen(game, levelselected));
+        }
     }
 
     @Override
