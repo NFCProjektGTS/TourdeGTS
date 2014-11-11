@@ -14,6 +14,7 @@ import gtsoffenbach.tourdegts.gameinterface.Input.TouchEvent;
 import gtsoffenbach.tourdegts.gameinterface.Screen;
 import gtsoffenbach.tourdegts.implementations.AndroidGame;
 import gtsoffenbach.tourdegts.implementations.SaveGame;
+import gtsoffenbach.tourdegts.minigame_math.MathGameScreen;
 
 /**
  * Created by Noli on 05.08.2014.
@@ -29,6 +30,7 @@ public class GameScreen extends Screen {
     //private Animation chest_anim;
     //private ArrayList tilearray = new ArrayList();
     private BlinkingText unlocktext,gotoProgresstext;
+    private UIProgressbar gameprogressbar;
     private ElementContainer container;
     private UIButton unlockbutton,gotoProgressButton;
     private int currentLevel;
@@ -78,6 +80,8 @@ public class GameScreen extends Screen {
                 }
                 game.getSave().save();
                 SaveGame.newGame = false;   //außer in den einstellungen MUSS IMMER newGame false gesetzt werden nach dem speichern!!!
+                int a = (int)(Math.random()*100);
+                gameprogressbar.setProgress(a);
             }
         };
         unlockbutton.setGraphics(game.getGraphics());
@@ -85,23 +89,25 @@ public class GameScreen extends Screen {
             @Override
             public void Click() {
                 super.Click();
-                game.setScreen(new ProgressScreen(game, currentLevel, currentLevel));
+                game.setScreen(new MathGameScreen(game));
+                //TODO REDO game.setScreen(new ProgressScreen(game, currentLevel, currentLevel));
+                //game.setScreen(new ProgressScreen(game, currentLevel, currentLevel));
 
             }
         };
         gotoProgressButton.setGraphics(game.getGraphics());
+        gameprogressbar = new UIProgressbar(container,(AndroidGame.width - Assets.button.getWidth()) / 2,AndroidGame.height - Assets.button.getHeight()-500,40,new int[0]);
+        gameprogressbar.setGraphics(game.getGraphics());
 
-
-
-        blink = new BlinkingText(new UIElement(container, AndroidGame.width / 2, AndroidGame.height -50, 2, 2), 2, 2, "Level: " + currentLevel, 80, Color.MAGENTA, 1);
+        blink = new BlinkingText(new UIElement(container, AndroidGame.width / 2, AndroidGame.height -50, 2, 2), 2, 2, "Level: " + currentLevel, 80, Color.MAGENTA, 1, Assets.standard);
 
 
 
         //container.addElement(firstbutton);
 
         //game.getGraphics().drawString("Tap to Start.", 400, 240, paint);
-        unlocktext = new BlinkingText(unlockbutton, 0, 0, "Alles Freischalten", 50, Color.BLACK, 1);
-        gotoProgresstext = new BlinkingText(gotoProgressButton, 0, 0, "Fortschritt", 50, Color.BLACK, 1);
+        unlocktext = new BlinkingText(unlockbutton, 0, 0, "Alles Freischalten", 50, Color.BLACK, 1,Assets.lobster);
+        gotoProgresstext = new BlinkingText(gotoProgressButton, 0, 0, "Fortschritt", 50, Color.BLACK, 1,Assets.lobster);
         //UIElement chest_container = new UIElement(container, AndroidGame.width / 2 - Assets.chest[0].getWidth() / 2, 10, Assets.chest[0].getWidth(), Assets.chest[0].getHeight());
         //Chest chest = new Chest(chest_container, chest_container.getRectangle().right, chest_container.getRectangle().bottom, 150, 5000);
         state = GameState.Running;
@@ -195,6 +201,7 @@ public class GameScreen extends Screen {
 
         if (state == GameState.Running)
             drawRunningUI(deltaTime);
+
     }
 
     public void animate() {

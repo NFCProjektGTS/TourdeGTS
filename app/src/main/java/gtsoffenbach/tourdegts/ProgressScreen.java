@@ -57,9 +57,9 @@ public class ProgressScreen extends Screen {
             this.selectedLevel = seleted;
         }
         this.container = new ElementContainer(this, true);
-        invIndicator = new BlinkingText(new UIElement(container, (AndroidGame.width / 2), 940, 0, 0), 0, 0,  inverseindiString, 100, Color.RED, 1);
-        indicator = new BlinkingText(new UIElement(container, (AndroidGame.width / 2), 940, 0, 0), 0, 0,  indicatorString, 100, Color.BLACK, 1);
-        levelname = new BlinkingText(new UIElement(container, (AndroidGame.width / 2), 1050, 0, 0), 0, 0, SaveGame.levels[0].getName(), 60, Color.BLACK, 1);
+        invIndicator = new BlinkingText(new UIElement(container, (AndroidGame.width / 2), 940, 0, 0), 0, 0,  inverseindiString, 150, Color.RED, 1,Assets.standard);
+        indicator = new BlinkingText(new UIElement(container, (AndroidGame.width / 2), 940, 0, 0), 0, 0,  indicatorString, 150, Color.BLACK, 1,Assets.standard);
+        levelname = new BlinkingText(new UIElement(container, (AndroidGame.width / 2), 1050, 0, 0), 0, 0, SaveGame.levels[0].getName(), 60, Color.BLACK, 1,Assets.lobster);
 //TODO alle gleichrücken
 //TODO grafik der Buttons(Schlösser) überschreiben
         buttons = new ArrayList<UIElement>();

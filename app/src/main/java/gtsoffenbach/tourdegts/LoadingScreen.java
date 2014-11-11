@@ -1,5 +1,7 @@
 package gtsoffenbach.tourdegts;
 
+import android.graphics.Typeface;
+
 import gtsoffenbach.tourdegts.gameinterface.Game;
 import gtsoffenbach.tourdegts.gameinterface.Graphics;
 import gtsoffenbach.tourdegts.gameinterface.Graphics.ImageFormat;
@@ -19,20 +21,21 @@ public class LoadingScreen extends Screen {
     @Override
     public void update(float deltaTime) {
         Graphics g = game.getGraphics();
-        Assets.menu = g.newImage("mainmenu.png", ImageFormat.RGB565);
-        Assets.background = g.newImage("gamescreen.png", ImageFormat.RGB565);
+        Assets.menu = g.newImage("mainmenu1.png", ImageFormat.RGB565);
+        Assets.background = g.newImage("gamescreen1.png", ImageFormat.RGB565);
 
-        Assets.lock = g.newImage("lock.png", ImageFormat.RGB565);
-        Assets.infobox = g.newImage("infobox.png", ImageFormat.RGB565);
+        Assets.lock = g.newImage("lock1.png", ImageFormat.RGB565);
+        Assets.infobox = g.newImage("infobox1.png", ImageFormat.RGB565);
         Assets.button = g.newImage("button.png", ImageFormat.RGB565);
         Assets.button_pressed = g.newImage("button_pressed.png", ImageFormat.RGB565);
         Assets.chest = new Image[]{g.newImage("chest/chest001.png", ImageFormat.RGB565), g.newImage("chest/chest002.png", ImageFormat.RGB565), g.newImage("chest/chest003.png", ImageFormat.RGB565), g.newImage("chest/chest004.png", ImageFormat.RGB565), g.newImage("chest/chest005.png", ImageFormat.RGB565), g.newImage("chest/chest006.png", ImageFormat.RGB565), g.newImage("chest/chest007.png", ImageFormat.RGB565), g.newImage("chest/chest008.png", ImageFormat.RGB565), g.newImage("chest/chest009.png", ImageFormat.RGB565), g.newImage("chest/chest010.png", ImageFormat.RGB565), g.newImage("chest/chest011.png", ImageFormat.RGB565), g.newImage("chest/chest012.png", ImageFormat.RGB565)};
         Assets.chest_half = new Image[]{g.newImage("chest/chest001.png", ImageFormat.RGB565), g.newImage("chest/chest002.png", ImageFormat.RGB565), g.newImage("chest/chest003.png", ImageFormat.RGB565), g.newImage("chest/chest004.png", ImageFormat.RGB565), g.newImage("chest/chest005.png", ImageFormat.RGB565), g.newImage("chest/chest006.png", ImageFormat.RGB565), g.newImage("chest/chest007.png", ImageFormat.RGB565), g.newImage("chest/chest008.png", ImageFormat.RGB565), g.newImage("chest/chest009.png", ImageFormat.RGB565)};
-        Assets.progressBackground = g.newImage("progressscreen.png", ImageFormat.RGB565);
+        Assets.progressBackground = g.newImage("progressscreen1.png", ImageFormat.RGB565);
         Assets.helpBackground = g.newImage("helpscreen.png", ImageFormat.RGB565);
         Assets.settingsBackground = g.newImage("settingsscreen.png", ImageFormat.RGB565);
         Assets.button_small = g.newImage("button_small.png", ImageFormat.RGB565);
         Assets.button_small_pressed = g.newImage("button_small_pressed.png", ImageFormat.RGB565);
+        Assets.progressbar = g.newImage("progessbar.png",ImageFormat.RGB565);
 
 
         //This is how you would load a sound if you had one.
