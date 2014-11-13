@@ -100,7 +100,6 @@ public class ProgressScreen extends Screen {
                 });
             }
         }
-//this.flip = new Point((AndroidGame.width-buttons[0].getRectangle().right)/2,(AndroidGame.height/2)); // Left Point of our main Element, + rect.right; for the right Point of our main Element
         updatePosZero(0);
     }
 
@@ -200,28 +199,6 @@ public class ProgressScreen extends Screen {
                     for (int i2 = 0; i2 < buttons.size(); i2++) {
                         buttons.get(i2).getRectangle().offsetTo(buttons.get(i2).getRectangle().left + speed, buttons.get(i2).getRectangle().top);
                     }
-//button.getRectangle().offsetTo(button.getRectangle().left + speed, button.getRectangle().top);
-/*if (selectedLevel == 0) {
-if (Math.abs(buttons[0].getRectangle().left) > (AndroidGame.width - buttons[0].getRectangle().right) / 2) { //out of bounds!!
-}
-if (Math.abs(buttons[0].getRectangle().left) + (AndroidGame.width - buttons[0].getRectangle().right) < (AndroidGame.width - buttons[0].getRectangle().right) / 2) {
-//load next
-}
-}
-if (selectedLevel > 0) {
-if (Math.abs(buttons[selectedLevel].getRectangle().left) > (AndroidGame.width - buttons[selectedLevel].getRectangle().right) / 2) { //left
-}
-if (Math.abs(buttons[0].getRectangle().left) + (AndroidGame.width - buttons[selectedLevel].getRectangle().right) < (AndroidGame.width - buttons[selectedLevel].getRectangle().right) / 2) {
-//load next
-}
-}
-if (selectedLevel < buttons.length) {
-if (Math.abs(buttons[0].getRectangle().left) < (AndroidGame.width - buttons[0].getRectangle().right) / 2) { //out of bounds!!
-}
-if (Math.abs(buttons[0].getRectangle().left) + (AndroidGame.width - buttons[0].getRectangle().right) > (AndroidGame.width - buttons[0].getRectangle().right) / 2) {
-//load next
-}
-}*/
                     last = new Point(event.x, event.y);
                 }
                 if (event.type == Input.TouchEvent.TOUCH_UP) {

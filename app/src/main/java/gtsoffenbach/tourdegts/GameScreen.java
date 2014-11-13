@@ -20,79 +20,38 @@ import gtsoffenbach.tourdegts.minigame_math.MathGameScreen;
  * Created by Noli on 05.08.2014.
  */
 public class GameScreen extends Screen {
-    private static Background bg1, bg2;
+    private static Background bg1;
     GameState state = GameState.Ready;
 
-    // Variable Setup
-    Paint paint, paint2, paint3;
-    private Image currentSprite;
-    private BlinkingText unlocktext,gotoProgresstext;
+
+    private BlinkingText gotoProgresstext;
     private UIProgressbar gameprogressbar;
     private ElementContainer container;
-    private UIButton unlockbutton,gotoProgressButton;
+    private UIButton gotoProgressButton;
     private int currentLevel;
     private BlinkingText blink;
 
     public GameScreen(final Game game, int level) {
         super(game);
         this.currentLevel = level;
-
-
-        bg1 = new Background(0, 0);
-        bg2 = new Background(AndroidGame.width, 0);
-
-        paint = new Paint();
-        paint.setTextSize(30);
-        paint.setTextAlign(Paint.Align.CENTER);
-        paint.setAntiAlias(true);
-        paint.setColor(Color.WHITE);
-
-        paint2 = new Paint();
-        paint2.setTextSize(100);
-        paint2.setTextAlign(Paint.Align.CENTER);
-        paint2.setAntiAlias(true);
-        paint2.setColor(Color.WHITE);
-
-        paint3 = new Paint();
-        paint3.setTextSize(100);
-        paint3.setTextAlign(Paint.Align.CENTER);
-        paint3.setAntiAlias(true);
-        paint3.setColor(Color.BLACK);
-        paint3.setAlpha(50);
-
-
-
-
+        bg1 = new Background(0,0);
         container = new ElementContainer(this, true);
-        unlockbutton = new UIButton(container, (AndroidGame.width - Assets.button.getWidth()) / 2, AndroidGame.height - Assets.button.getHeight()-300) {
-            @Override
-            public void Click() {
-                super.Click();
-                for (int i = 0; i < SaveGame.levels.length; i++) {
-                    SaveGame.levels[i].setUnlocked(true);
-                }
-                game.getSave().save();
-                SaveGame.newGame = false;   //außer in den einstellungen MUSS IMMER newGame false gesetzt werden nach dem speichern!!!
-                int a = (int)(Math.random()*100);
-                gameprogressbar.setProgress(a);
-            }
-        };
-        unlockbutton.setGraphics(game.getGraphics());
-        gotoProgressButton = new UIButton(container, (AndroidGame.width - Assets.button.getWidth()) / 2, AndroidGame.height - Assets.button.getHeight()-100) {
+        gotoProgressButton = new UIButton(container, (AndroidGame.width - Assets.button.getWidth()) / 2,350) {
             @Override
             public void Click() {
                 super.Click();
                 //game.setScreen(new MathGameScreen(game));
                 game.setScreen(new ProgressScreen(game, currentLevel, currentLevel));
                 //game.setScreen(new ProgressScreen(game, currentLevel, currentLevel));
-
             }
         };
+
+
+
         gotoProgressButton.setGraphics(game.getGraphics());
-        gameprogressbar = new UIProgressbar(container,(AndroidGame.width - Assets.button.getWidth()) / 2,AndroidGame.height - Assets.button.getHeight()-500,40,new int[0]);
+        gameprogressbar = new UIProgressbar(container,(AndroidGame.width - Assets.progressbar.getWidth()) / 2,Assets.button.getHeight(),40,new int[0],Colors.ALPHA33);
         gameprogressbar.setGraphics(game.getGraphics());
-        blink = new BlinkingText(new UIElement(container, AndroidGame.width / 2, AndroidGame.height -50, 2, 2), 2, 2, "Level: " + currentLevel, 80, Color.MAGENTA, 1, Assets.standard);
-        unlocktext = new BlinkingText(unlockbutton, 0, 0, "Alles Freischalten", 50, Color.BLACK, 1,Assets.lobster);
+        blink = new BlinkingText(new UIElement(container, 35,20, 2, 2), 2, 2, "Tag: " + currentLevel, 30, Colors.BLACK, 1, Assets.standard);
         gotoProgresstext = new BlinkingText(gotoProgressButton, 0, 0, "Fortschritt", 50, Color.BLACK, 1,Assets.lobster);
         state = GameState.Running;
     }
@@ -101,7 +60,6 @@ public class GameScreen extends Screen {
     @Override
     public void update(float deltaTime) {
         List touchEvents = game.getInput().getTouchEvents();
-
         if (state == GameState.Running)
             updateRunning(touchEvents, deltaTime);
     }
@@ -112,7 +70,6 @@ public class GameScreen extends Screen {
     }
 
     private void updateRunning(List touchEvents, float deltaTime) {
-
         int len = touchEvents.size();
         for (int i = 0; i < len; i++) {
             TouchEvent event = (TouchEvent) touchEvents.get(i);
@@ -134,7 +91,6 @@ public class GameScreen extends Screen {
                     }
                 }
                 if (Utils.inBounds(event, new Rect(0, 240, 800, 240))) {
-                    nullify();
                     goToMenu();
                 }
             }
@@ -146,7 +102,6 @@ public class GameScreen extends Screen {
         Graphics g = game.getGraphics();
         g.drawImage(Assets.background, bg1.getBgX(), bg1.getBgY());
         gotoProgresstext.update(deltaTime);
-        unlocktext.update(deltaTime);
         if (state == GameState.Running)
             drawRunningUI(deltaTime);
     }
@@ -157,34 +112,13 @@ public class GameScreen extends Screen {
         //chest_anim.update(50);
     }
 
-    private void nullify() {
-        paint = null;
-        bg1 = null;
-        bg2 = null;
-        currentSprite = null;
-        System.gc();
-    }
 
 
     private void drawRunningUI(float deltaTime) {
         Graphics g = game.getGraphics();
         container.updateAll(deltaTime, g);
-        //g.drawImage(currentSprite, 400, 800);
-        //currentSprite = chest_anim.getImage();
-        /*g.drawImage(Assets.button, 0, 285, 0, 0, 60, 60);
-        g.drawImage(Assets.button, 0, 350, 0, 65, 60, 60);
-        g.drawImage(Assets.button, 0, 415, 0, 130, 60, 60);
-        g.drawImage(Assets.button, 0, 0, 0, 195, 60, 60);*/
     }
 
-    private void drawPausedUI() {
-        Graphics g = game.getGraphics();
-        // Darken the entire screen so you can display the Paused screen.
-        g.drawARGB(155, 0, 0, 0);
-        g.drawString("Resume", 400, 165, paint2);
-        g.drawString("Menu", 400, 360, paint2);
-
-    }
 
     @Override
     public void pause() {
@@ -213,9 +147,7 @@ public class GameScreen extends Screen {
     }
 
     private void goToMenu() {
-        // TODO Auto-generated method stub
         game.setScreen(new MainMenuScreen(game));
-
     }
 
     enum GameState {
