@@ -11,5 +11,9 @@ public class Colors {
    public static final int BLUE = Color.argb(255,100,182,177);
    public static final int WHITE = Color.argb(255,222,212,185);
    public static final int GREEN = Color.argb(255,81,149,72);
+   public static final int BLUE2 = Color.argb(255,11,46,89);
+   public static final int ALPHA50 = Color.argb(127,0,0,0);
+   public static final int ALPHA25 = Color.argb(63,0,0,0);
+   public static final int ALPHA33 = Color.argb(85,0,0,0);
 
 }
