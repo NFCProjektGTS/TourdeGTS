@@ -1,4 +1,4 @@
-package gtsoffenbach.tourdegts.ContentScreens;
+package gtsoffenbach.tourdegts.ContentElement;
 
 import gtsoffenbach.tourdegts.gameinterface.Game;
 import gtsoffenbach.tourdegts.gameinterface.Screen;
@@ -8,12 +8,12 @@ import gtsoffenbach.tourdegts.implementations.LevelList;
 /**
  * Created by Noli on 11.11.2014.
  */
-public class Industriemechaniker extends Screen {
+public class ElektrischeSchaltungen extends Screen {
     Level level;
 
-    public Industriemechaniker(Game game) {
+    public ElektrischeSchaltungen(Game game) {
         super(game);
-        level = LevelList.getLevels()[6];
+        level = LevelList.getLevels()[4];
     }
 
     @Override

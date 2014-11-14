@@ -1,4 +1,4 @@
-package gtsoffenbach.tourdegts.ContentScreens;
+package gtsoffenbach.tourdegts.ContentElement;
 
 import gtsoffenbach.tourdegts.gameinterface.Game;
 import gtsoffenbach.tourdegts.gameinterface.Screen;

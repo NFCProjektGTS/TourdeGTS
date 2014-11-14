@@ -16,6 +16,8 @@ public class Element {
     private boolean visible;
     private Graphics graphics;
     private boolean pressed = true;
+    private int transparency = 0;
+    private boolean fade = false, fadein = true;
 
     public Element(final UIElement father, final int sx, final int sy) {
         this.father = father;
@@ -25,6 +27,22 @@ public class Element {
         this.visible = true;
         this.enabled = true;
         //this.graphics = graphics;
+    }
+
+    public boolean isFade() {
+        return fade;
+    }
+
+    public void setFade(boolean fade) {
+        this.fade = fade;
+    }
+
+    public boolean isFadein() {
+        return fadein;
+    }
+
+    public void setFadein(boolean fadein) {
+        this.fadein = fadein;
     }
 
     public UIElement getFather() {
@@ -86,13 +104,29 @@ public class Element {
     public void update(float delta) {
         if (enabled) {
             if (visible) {
+                if (fade) {
+                    if (!fadein && transparency < 254) {
+                        transparency += 20;
+                        if (transparency > 254)
+                            transparency = 254;
+                        System.out.println("Fading in");
+                    }
+                    if (fadein && transparency >= 1) {
+                        transparency -= 20;
+                        if (transparency < 0)
+                            transparency = 0;
+                        System.out.println("Fading out");
+                    }
+                }
                 draw(delta);
+
             }
             //do other
         }
     }
 
     public void draw(float delta) {
+        graphics.drawARGB(transparency, 0, 0, 0);
     }
 
 

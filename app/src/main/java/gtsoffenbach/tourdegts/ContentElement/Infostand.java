@@ -1,4 +1,4 @@
-package gtsoffenbach.tourdegts.ContentScreens;
+package gtsoffenbach.tourdegts.ContentElement;
 
 import gtsoffenbach.tourdegts.gameinterface.Game;
 import gtsoffenbach.tourdegts.gameinterface.Screen;
@@ -8,12 +8,13 @@ import gtsoffenbach.tourdegts.implementations.LevelList;
 /**
  * Created by Noli on 11.11.2014.
  */
-public class JSRechner extends Screen {
+
+public class Infostand extends Screen {
     Level level;
 
-    public JSRechner(Game game) {
+    public Infostand(Game game) {
         super(game);
-        level = LevelList.getLevels()[5];
+        level = LevelList.getLevels()[1];
     }
 
     @Override

@@ -36,6 +36,14 @@ public class GameGraphics implements Graphics {
         this.paint = new Paint();
     }
 
+    public Paint getPaint() {
+        return paint;
+    }
+
+    public void setPaint(Paint paint) {
+        this.paint = paint;
+    }
+
     @Override
     public Image newImage(String fileName, ImageFormat format) {
         Config config = null;

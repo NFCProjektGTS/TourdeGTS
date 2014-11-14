@@ -30,8 +30,11 @@ public interface Graphics {
 
     public void drawARGB(int i, int j, int k, int l);
 
+    public Paint getPaint();
+
+    public void setPaint(Paint p);
+
     public static enum ImageFormat {
         ARGB8888, ARGB4444, RGB565
     }
-
 }

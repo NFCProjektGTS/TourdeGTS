@@ -42,19 +42,23 @@ public class GameNFC extends NFC {
 
     @Override
     public void installService() {
-        if (mNfcAdapter.isEnabled()) {
-            Intent activityIntent = new Intent(caller, caller.getClass());
-            activityIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            PendingIntent intent = PendingIntent.getActivity(caller, 0,
-                    activityIntent, PendingIntent.FLAG_CANCEL_CURRENT);
-            mNfcAdapter.enableForegroundDispatch(caller, intent, mTagFilters, null);
+        if (mNfcAdapter != null) {
+            if (mNfcAdapter.isEnabled() || mNfcAdapter != null) {
+                Intent activityIntent = new Intent(caller, caller.getClass());
+                activityIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                PendingIntent intent = PendingIntent.getActivity(caller, 0,
+                        activityIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+                mNfcAdapter.enableForegroundDispatch(caller, intent, mTagFilters, null);
+            }
         }
     }
 
     @Override
     public void uninstallService() {
-        if (mNfcAdapter.isEnabled()) {
-            mNfcAdapter.disableForegroundDispatch(caller);
+        if (mNfcAdapter != null) {
+            if (mNfcAdapter.isEnabled()) {
+                mNfcAdapter.disableForegroundDispatch(caller);
+            }
         }
     }
 

@@ -5,7 +5,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import gtsoffenbach.tourdegts.ContentScreens.WelcomeScreen;
+import gtsoffenbach.tourdegts.ContentElement.WelcomeScreen;
 import gtsoffenbach.tourdegts.gameinterface.Game;
 import gtsoffenbach.tourdegts.gameinterface.Graphics;
 import gtsoffenbach.tourdegts.gameinterface.Input;
@@ -23,10 +23,12 @@ public class MainMenuScreen extends Screen {
     private ElementContainer container;
     private int levelselected = 0;
 
+
     public MainMenuScreen(Game game) {
         super(game);
         container = new ElementContainer(this, true);
-        button_start = new UIButton(container, AndroidGame.width/2-Assets.button.getWidth()/2, 500) {
+
+        button_start = new UIButton(container, AndroidGame.width / 2 - Assets.button.getWidth() / 2, 500) {
             @Override
             public void Click() {
                 super.Click();
@@ -34,15 +36,16 @@ public class MainMenuScreen extends Screen {
                 goToScreenGame();
             }
         };
-        button_help = new UIButton(container,AndroidGame.width/2-Assets.button.getWidth()/2,715) {
+        button_help = new UIButton(container, AndroidGame.width / 2 - Assets.button.getWidth() / 2, 715) {
             @Override
             public void Click() {
                 super.Click();
+
                 goToScreenHelp();
             }
         };
 
-        button_settings = new UIButton(container, AndroidGame.width/2-Assets.button.getWidth()/2, 930) {
+        button_settings = new UIButton(container, AndroidGame.width / 2 - Assets.button.getWidth() / 2, 930) {
             @Override
             public void Click() {
                 super.Click();
@@ -61,9 +64,9 @@ public class MainMenuScreen extends Screen {
             start_str = "Spiel fortsetzen";
         }
 
-        start = new BlinkingText(button_start, 0, 0, start_str, 75, Color.BLACK, 1,Assets.lobster);
-        help = new BlinkingText(button_help, 0, 0, "Hilfe", 75, Color.BLACK, 1,Assets.lobster);
-        settings = new BlinkingText(button_settings, 0,0, "Einstellungen", 75, Color.BLACK, 1,Assets.lobster);
+        start = new BlinkingText(button_start, 0, 0, start_str, 75, Color.BLACK, 1, Assets.lobster);
+        help = new BlinkingText(button_help, 0, 0, "Hilfe", 75, Color.BLACK, 1, Assets.lobster);
+        settings = new BlinkingText(button_settings, 0, 0, "Einstellungen", 75, Color.BLACK, 1, Assets.lobster);
 
     }
 

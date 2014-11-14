@@ -1,4 +1,4 @@
-package gtsoffenbach.tourdegts.ContentScreens;
+package gtsoffenbach.tourdegts.ContentElement;
 
 import android.graphics.Color;
 
@@ -8,7 +8,6 @@ import gtsoffenbach.tourdegts.Assets;
 import gtsoffenbach.tourdegts.Background;
 import gtsoffenbach.tourdegts.BlinkingText;
 import gtsoffenbach.tourdegts.ElementContainer;
-import gtsoffenbach.tourdegts.GameScreen;
 import gtsoffenbach.tourdegts.UIButton;
 import gtsoffenbach.tourdegts.gameinterface.Game;
 import gtsoffenbach.tourdegts.gameinterface.Graphics;
@@ -28,33 +27,55 @@ public class WelcomeScreen extends Screen {
     private BlinkingText welcometext;
     private ElementContainer container;
     private UIButton goButton;
+
+    private Thread thread;
+
+
+    //private int transparency = 0;
     //private UIElement element;
 
     public WelcomeScreen(final Game game) {
         super(game);
         bg1 = new Background(0, 0);
-        container = new ElementContainer(this, true);
-        //element = new UIElement(container, 0, 0, 0, 0);
-        goButton = new UIButton(container, (AndroidGame.width - Assets.button.getWidth()) / 2, AndroidGame.height - Assets.button.getHeight() - 300) {
 
+        container = new ElementContainer(this, true);
+
+
+        //element = new UIElement(container, 0, 0, 0, 0);
+
+        goButton = new UIButton(container, (AndroidGame.width - Assets.button.getWidth()) / 2, AndroidGame.height - Assets.button.getHeight() - 300) {
             @Override
             public void Click() {
                 super.Click();
-                //fadeOut();
+                fadeOut(container);
 
-                game.setScreen(new GameScreen(game, 0)); //init first Level
-                game.getSave().save();
+
+               /* while(true){
+                    fadeaway();
+                    if(!totalelement.isFade()){
+                        game.getSave().save();
+                        game.setScreen(new GameScreen(game, 0)); //init first Level
+                    }
+                }*/
+                /*while(true){
+                    if(!totalelement.isFade()){
+                        game.getSave().save();
+                        game.setScreen(new GameScreen(game, 0)); //init first Level
+                    }
+                }    */
+
             }
         };
         goButton.setGraphics(game.getGraphics());
+        welcometext = new BlinkingText(goButton, 0, 0, "Herzlich Wilkommen zur 'Tour de GTS'", 44, Color.parseColor("#324C95"), 1, Assets.lobster);
+        fadeIn(container);
 
-        welcometext = new BlinkingText(goButton, 0, 0, "Herzlich Wilkommen zur 'Tour de GTS'", 22, Color.parseColor("#324C95"), 1, Assets.lobster);
+
     }
+
 
     @Override
     public void update(float deltaTime) {
-
-
         List<Input.TouchEvent> touchEvents = game.getInput().getTouchEvents();
 
         int len = touchEvents.size();
@@ -71,6 +92,7 @@ public class WelcomeScreen extends Screen {
 
 
         container.updateAll(deltaTime, g);
+
     }
 
     @Override
@@ -79,17 +101,19 @@ public class WelcomeScreen extends Screen {
     }
 
 
-    public void fadeIn() {
+   /* public void fadeIn() {
         for (int i = 255; i > 0; i--) {
             game.getGraphics().drawARGB(i, 0, 0, 0);
+            Thread.sleep(100);
         }
     }
 
     public void fadeOut() {
         for (int i = 0; i > 255; i++) {
             game.getGraphics().drawARGB(i, 0, 0, 0);
+            Thread.sleep(100);
         }
-    }
+    }*/
 
     @Override
     public void resume() {
