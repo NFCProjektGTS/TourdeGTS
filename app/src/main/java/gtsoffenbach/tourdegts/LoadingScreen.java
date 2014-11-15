@@ -8,6 +8,7 @@ import gtsoffenbach.tourdegts.gameinterface.Graphics.ImageFormat;
 import gtsoffenbach.tourdegts.gameinterface.Image;
 import gtsoffenbach.tourdegts.gameinterface.Screen;
 import gtsoffenbach.tourdegts.implementations.AndroidGame;
+import gtsoffenbach.tourdegts.implementations.LevelList;
 
 /**
  * Created by Noli on 05.08.2014.
@@ -20,7 +21,9 @@ public class LoadingScreen extends Screen {
 
     @Override
     public void update(float deltaTime) {
+
         Graphics g = game.getGraphics();
+        LevelList.init(g);
         Assets.menu = g.newImage("mainmenu1.png", ImageFormat.RGB565);
         Assets.background = g.newImage("gamescreen1.png", ImageFormat.RGB565);
 

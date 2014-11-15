@@ -1,5 +1,18 @@
 package gtsoffenbach.tourdegts.implementations;
 
+
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import android.widget.ImageView;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+import gtsoffenbach.tourdegts.R;
+import gtsoffenbach.tourdegts.gameinterface.Image;
+
 /**
  * Created by Noli on 04.09.2014.
  */
@@ -11,6 +24,8 @@ public class Level {
     private int levelnumber;
     private boolean unlocked;
 
+    private Image levelPicture;
+
 
     Level(String name,String info,String raum,String lehrer, int level, boolean unlocked) {
         this.name = name;
@@ -19,6 +34,17 @@ public class Level {
         this.lehrer = lehrer;
         this.levelnumber = level;
         this.unlocked = unlocked;
+
+
+    }
+
+
+
+    public void setImage(Image value){
+        levelPicture = value;
+    }
+    public Image getImage(){
+        return levelPicture;
     }
 
     public int getLevelnumber() {

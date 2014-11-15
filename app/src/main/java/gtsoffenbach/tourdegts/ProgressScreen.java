@@ -11,6 +11,7 @@ import gtsoffenbach.tourdegts.gameinterface.Graphics;
 import gtsoffenbach.tourdegts.gameinterface.Input;
 import gtsoffenbach.tourdegts.gameinterface.Screen;
 import gtsoffenbach.tourdegts.implementations.AndroidGame;
+import gtsoffenbach.tourdegts.implementations.LevelList;
 import gtsoffenbach.tourdegts.implementations.SaveGame;
 
 /**
@@ -68,37 +69,9 @@ public class ProgressScreen extends Screen {
             if(i==0){
                 localoffset = offset/2;
             }
-            if (SaveGame.levels[i].isUnlocked()) {
-
                 final int finalLocaloffset = localoffset;
-                buttons.add(new UIButton(container, finalLocaloffset + i * AndroidGame.width + (AndroidGame.width - Assets.infobox.getWidth()) / 2, 600 ){
-                    @Override
-                    public void Click() {
-                        //game.setScreen(new GameScreen(game, selectedLevel));
-                        System.out.println("Click");
-                    }
+                buttons.add(new LevelUIButton(SaveGame.levels[i], container, finalLocaloffset + i * AndroidGame.width + (AndroidGame.width - Assets.infobox.getWidth()) / 2, 600 ));
 
-                    @Override
-                    public void draw(float delta) {
-                        getGraphics().drawImage(Assets.infobox,  getRectangle().left -35 +AndroidGame.width/2 - Assets.infobox.getWidth()/2, getRectangle().top -50 - Assets.infobox.getHeight() / 2);
-
-                    }
-                });
-            } else {
-                final int finalLocaloffset1 = localoffset;
-                buttons.add(new UIButton(container, finalLocaloffset1 + i * AndroidGame.width + (AndroidGame.width - Assets.infobox.getWidth()) / 2, 600) {
-                    @Override
-                    public void Click() {
-                        //game.setScreen(new GameScreen(game, selectedLevel));
-                    }
-
-                    @Override
-                    public void draw(float delta) {
-                        getGraphics().drawImage(Assets.infobox,  getRectangle().left -35 +AndroidGame.width/2 - Assets.infobox.getWidth()/2, getRectangle().top -50 - Assets.infobox.getHeight() / 2);
-                        getGraphics().drawImage(Assets.lock,  getRectangle().left -35 +AndroidGame.width/2 - Assets.lock.getWidth()/2 , getRectangle().top - 50 - Assets.lock.getHeight() / 2);
-                    }
-                });
-            }
         }
         updatePosZero(0);
     }
