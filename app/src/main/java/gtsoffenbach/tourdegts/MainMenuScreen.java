@@ -64,9 +64,9 @@ public class MainMenuScreen extends Screen {
             start_str = "Spiel fortsetzen";
         }
 
-        start = new BlinkingText(button_start, 0, 0, start_str, 75, Color.BLACK, 1, Assets.lobster);
-        help = new BlinkingText(button_help, 0, 0, "Hilfe", 75, Color.BLACK, 1, Assets.lobster);
-        settings = new BlinkingText(button_settings, 0, 0, "Einstellungen", 75, Color.BLACK, 1, Assets.lobster);
+        start = new BlinkingText(button_start, 0, 0, start_str, 75, Colors.LIGHT1, 1, Assets.gRoboto);
+        help = new BlinkingText(button_help, 0, 0, "Hilfe", 75, Colors.LIGHT1, 1, Assets.gRoboto);
+        settings = new BlinkingText(button_settings, 0, 0, "Einstellungen", 75, Colors.LIGHT1, 1, Assets.gRoboto);
 
     }
 

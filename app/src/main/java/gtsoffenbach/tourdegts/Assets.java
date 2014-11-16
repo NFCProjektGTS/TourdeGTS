@@ -18,12 +18,13 @@ public class Assets {
     public static Image button, button_pressed, button_small, button_small_pressed;
     public static Sound click, magic; //magic is a sound played when UI element is spawned with cool effect
     public static Music theme;
-    public static Typeface standard,lobster;
+    public static Typeface standard,lobster,gRoboto;
 
 
     public static void load(AndroidGame game,Context ctx) {
 
         lobster = Typeface.createFromAsset(ctx.getAssets(),"lobster.ttf");
+        gRoboto = Typeface.createFromAsset(ctx.getAssets(),"robotoReg.ttf");
         standard = Typeface.DEFAULT;
         // TODO Auto-generated method stub
         //theme = game.getAudio().createMusic("menutheme.ogg");

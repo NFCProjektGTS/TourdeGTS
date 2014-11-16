@@ -7,6 +7,7 @@ import java.util.List;
 import gtsoffenbach.tourdegts.Assets;
 import gtsoffenbach.tourdegts.Background;
 import gtsoffenbach.tourdegts.BlinkingText;
+import gtsoffenbach.tourdegts.Colors;
 import gtsoffenbach.tourdegts.ElementContainer;
 import gtsoffenbach.tourdegts.UIButton;
 import gtsoffenbach.tourdegts.gameinterface.Game;
@@ -67,7 +68,7 @@ public class WelcomeScreen extends Screen {
             }
         };
         goButton.setGraphics(game.getGraphics());
-        welcometext = new BlinkingText(goButton, 0, 0, "Herzlich Wilkommen zur 'Tour de GTS'", 44, Color.parseColor("#324C95"), 1, Assets.lobster);
+        welcometext = new BlinkingText(goButton, 0, 0, "Herzlich Wilkommen zur 'Tour de GTS'", 44, Colors.LIGHT1, 1, Assets.gRoboto);
         fadeIn(container);
 
 

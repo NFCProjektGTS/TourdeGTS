@@ -9,11 +9,11 @@ import android.graphics.Typeface;
  */
 public class BlinkingText extends Element {
     //private Graphics graphics;
-    private Paint paint;
+    public Paint paint;
     private String msg;
-    private boolean toggle;
-    private double speed;
-    private UIElement dad;
+    public boolean toggle;
+    public double speed;
+    public UIElement dad;
     private int size;
     private int color;
     private Typeface font;

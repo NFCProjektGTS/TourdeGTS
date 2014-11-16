@@ -18,6 +18,7 @@ import gtsoffenbach.tourdegts.gameinterface.Image;
  */
 public class Level {
     private String name;
+    private String anzeigeName;
     private String raum;
     private String info;
     private String lehrer;
@@ -27,8 +28,9 @@ public class Level {
     private Image levelPicture;
 
 
-    Level(String name,String info,String raum,String lehrer, int level, boolean unlocked) {
+    Level(String name,String anzeigeName,String info,String raum,String lehrer, int level, boolean unlocked) {
         this.name = name;
+        this.anzeigeName= anzeigeName;
         this.info = info;
         this.raum = raum;
         this.lehrer = lehrer;
@@ -45,6 +47,10 @@ public class Level {
     }
     public Image getImage(){
         return levelPicture;
+    }
+
+    public String getAnzeigeName() {
+        return anzeigeName;
     }
 
     public int getLevelnumber() {

@@ -29,30 +29,42 @@ public class GameScreen extends Screen {
     private ElementContainer container;
     private UIButton gotoProgressButton;
     private int currentLevel;
-    private BlinkingText blink;
+    private BlinkingText blink,textname,textraum,textlehrer;
+    private MultiLineBlinkingText textinfo;
 
     public GameScreen(final Game game, int level) {
         super(game);
         this.currentLevel = level;
         bg1 = new Background(0,0);
         container = new ElementContainer(this, true);
-        gotoProgressButton = new UIButton(container, (AndroidGame.width - Assets.button.getWidth()) / 2,350) {
+        /*gotoProgressButton = new UIButton(container, (AndroidGame.width - Assets.button.getWidth()) / 2,200) {
             @Override
             public void Click() {
                 super.Click();
+
                 //game.setScreen(new MathGameScreen(game));
                 game.setScreen(new ProgressScreen(game, currentLevel, currentLevel));
                 //game.setScreen(new ProgressScreen(game, currentLevel, currentLevel));
             }
+        };*/
+        //gotoProgressButton.setGraphics(game.getGraphics());
+        //gotoProgresstext = new BlinkingText(gotoProgressButton, 0, 0, "Fortschritt", 70, Colors.LIGHT1, 1,Assets.gRoboto);
+        gameprogressbar = new UIProgressbar(container,(AndroidGame.width - Assets.progressbar.getWidth()) / 2,177,40,new int[0],Colors.ALPHA33){
+            @Override
+            public void Click() {
+                super.Click();
+                game.setScreen(new ProgressScreen(game, currentLevel, currentLevel));
+                for(int i=0; i<SaveGame.levels.length;i++){
+                   SaveGame.levels[i].setUnlocked(true);
+                }
+            }
         };
-
-
-
-        gotoProgressButton.setGraphics(game.getGraphics());
-        gameprogressbar = new UIProgressbar(container,(AndroidGame.width - Assets.progressbar.getWidth()) / 2,Assets.button.getHeight(),40,new int[0],Colors.ALPHA33);
         gameprogressbar.setGraphics(game.getGraphics());
-        blink = new BlinkingText(new UIElement(container, 35,20, 2, 2), 2, 2, "Tag: " + currentLevel, 30, Colors.BLACK, 1, Assets.standard);
-        gotoProgresstext = new BlinkingText(gotoProgressButton, 0, 0, "Fortschritt", 50, Color.BLACK, 1,Assets.lobster);
+        blink = new BlinkingText(new UIElement(container, 35,20, 2, 2), 2, 2, "Tag: " + currentLevel, 30, Colors.RED, 1, Assets.standard);
+        textname= new MultiLineBlinkingText(new UIElement(container, 100,480, 2, 2), 2, 2, SaveGame.levels[currentLevel].getAnzeigeName(), 80, Colors.BLACK, 1, Assets.gRoboto,1300);
+        textraum= new MultiLineBlinkingText(new UIElement(container, 100,630, 2, 2), 2, 2, SaveGame.levels[currentLevel].getRaum(), 50, Colors.BLACK, 1, Assets.gRoboto,1300);
+        textlehrer= new MultiLineBlinkingText(new UIElement(container, 100,690, 2, 2), 2, 2, SaveGame.levels[currentLevel].getLehrer(), 50, Colors.BLACK, 1, Assets.gRoboto,1300);
+        textinfo= new MultiLineBlinkingText(new UIElement(container, 100,760, 2, 2), 2, 2, "Hi, mein name ist peter, ich wohne in petersbach und esse gerne alfreds, machmal treffe ich einen Donaudampfschiffahrtsgesellschafts Kapitän",50, Colors.BLACK, 1, Assets.gRoboto,1300);
         state = GameState.Running;
     }
 
@@ -100,8 +112,8 @@ public class GameScreen extends Screen {
     @Override
     public void paint(float deltaTime) {
         Graphics g = game.getGraphics();
-        g.drawImage(Assets.background, bg1.getBgX(), bg1.getBgY());
-        gotoProgresstext.update(deltaTime);
+        g.drawImage(Assets.background, 0,0);
+//        gotoProgresstext.update(deltaTime);
         if (state == GameState.Running)
             drawRunningUI(deltaTime);
     }

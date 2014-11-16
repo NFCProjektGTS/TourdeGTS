@@ -19,7 +19,7 @@ import gtsoffenbach.tourdegts.implementations.SaveGame;
  */
 public class ProgressScreen extends Screen {
     int step;
-    BlinkingText levelname,indicator,invIndicator;
+    BlinkingText levelname,indicator,invIndicator,infotext;
     private int lastLevel;
     private int selectedLevel;
     private ElementContainer container;
@@ -34,7 +34,7 @@ public class ProgressScreen extends Screen {
     private boolean ispop;
     private int mult = 1;
     private int offset = 110;
-    private String indicatorString, inverseindiString;
+    private String indicatorString, inverseindiString,infoString;
     private int wasdragged = 0;
 
     public ProgressScreen(final Game game, int lastlevel, int seleted) { //NEED SELECTED LEVEL
@@ -57,10 +57,12 @@ public class ProgressScreen extends Screen {
         } else {
             this.selectedLevel = seleted;
         }
+
         this.container = new ElementContainer(this, true);
         invIndicator = new BlinkingText(new UIElement(container, (AndroidGame.width / 2), 940, 0, 0), 0, 0,  inverseindiString, 150, Color.RED, 1,Assets.standard);
         indicator = new BlinkingText(new UIElement(container, (AndroidGame.width / 2), 940, 0, 0), 0, 0,  indicatorString, 150, Color.BLACK, 1,Assets.standard);
-        levelname = new BlinkingText(new UIElement(container, (AndroidGame.width / 2), 1050, 0, 0), 0, 0, SaveGame.levels[0].getName(), 60, Color.BLACK, 1,Assets.lobster);
+        levelname = new BlinkingText(new UIElement(container, (AndroidGame.width / 2), 1050, 0, 0), 0, 0, SaveGame.levels[0].getName(), 60, Color.BLACK, 1,Assets.gRoboto);
+        infotext = new BlinkingText(new UIElement(container, (AndroidGame.width / 2), 1120, 0, 0), 0, 0, "info hier", 40, Color.BLACK, 1,Assets.gRoboto);
 //TODO alle gleichrücken
 //TODO grafik der Buttons(Schlösser) überschreiben
         buttons = new ArrayList<UIElement>();
@@ -137,7 +139,15 @@ public class ProgressScreen extends Screen {
                 indicatorString = indicatorString + ".";
                 inverseindiString = inverseindiString + " ";
             }
+
         }
+        if(SaveGame.levels[selectedLevel].isUnlocked()){
+            infoString="Bild berühren für mehr Infos";
+        }else{
+            infoString="im "+SaveGame.levels[selectedLevel].getRaum()+" freischaltbar";
+        }
+
+        infotext.setMsg(infoString);
         invIndicator.setMsg(inverseindiString);
         indicator.setMsg(indicatorString);
             if (chest != null) {
@@ -166,7 +176,7 @@ public class ProgressScreen extends Screen {
                 }
                 if (event.type == Input.TouchEvent.TOUCH_DRAGGED) {
                     wasdragged++;
-                    System.out.println(wasdragged);
+                    //System.out.println(wasdragged);
                     now = new Point(event.x, event.y);
                     this.speed = (int) ((now.x - last.x));
                     for (int i2 = 0; i2 < buttons.size(); i2++) {
