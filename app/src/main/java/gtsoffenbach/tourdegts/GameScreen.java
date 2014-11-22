@@ -64,7 +64,7 @@ public class GameScreen extends Screen {
         textname= new MultiLineBlinkingText(new UIElement(container, 100,480, 2, 2), 2, 2, SaveGame.levels[currentLevel].getAnzeigeName(), 80, Colors.BLACK, 1, Assets.gRoboto,1300);
         textraum= new MultiLineBlinkingText(new UIElement(container, 100,630, 2, 2), 2, 2, SaveGame.levels[currentLevel].getRaum(), 50, Colors.BLACK, 1, Assets.gRoboto,1300);
         textlehrer= new MultiLineBlinkingText(new UIElement(container, 100,690, 2, 2), 2, 2, SaveGame.levels[currentLevel].getLehrer(), 50, Colors.BLACK, 1, Assets.gRoboto,1300);
-        textinfo= new MultiLineBlinkingText(new UIElement(container, 100,760, 2, 2), 2, 2, "Hi, mein name ist peter, ich wohne in petersbach und esse gerne alfreds, machmal treffe ich einen Donaudampfschiffahrtsgesellschafts Kapitän",50, Colors.BLACK, 1, Assets.gRoboto,1300);
+        textinfo= new MultiLineBlinkingText(new UIElement(container, 100,760, 2, 2), 2, 2, SaveGame.levels[currentLevel].getInfo(),50, Colors.BLACK, 1, Assets.gRoboto,1300);
         state = GameState.Running;
     }
 

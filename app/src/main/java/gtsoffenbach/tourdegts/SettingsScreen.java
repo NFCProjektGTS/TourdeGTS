@@ -37,8 +37,8 @@ public class SettingsScreen extends Screen {
                 //game.getSave().setNewGame(true);
             }
         };
-        new BlinkingText(button_reset, 0, 0, "Spiel zurücksetzen", 70, Color.BLACK, 1,Assets.lobster);
-        new BlinkingText(button_back, 0, 0, "Zurück", 70, Color.BLACK, 1,Assets.lobster);
+        new BlinkingText(button_reset, 0, 0, "Spiel zurücksetzen", 60, Color.WHITE, 1,Assets.gRoboto);
+        new BlinkingText(button_back, 0, 0, "Zurück", 60, Color.WHITE, 1,Assets.gRoboto);
     }
 
     private void goToScreenMenu() {
