@@ -67,12 +67,7 @@ public class ProgressScreen extends Screen {
 //TODO grafik der Buttons(Schlösser) überschreiben
         buttons = new ArrayList<UIElement>();
         for (int i = 0; i < SaveGame.levels.length; i++) {
-            int localoffset = offset;
-            if(i==0){
-                localoffset = offset/2;
-            }
-                final int finalLocaloffset = localoffset;
-                buttons.add(new LevelUIButton(SaveGame.levels[i], container, finalLocaloffset + i * AndroidGame.width + (AndroidGame.width - Assets.infobox.getWidth()) / 2, 600 ));
+                buttons.add(new LevelUIButton(SaveGame.levels[i], container, i * AndroidGame.width + (AndroidGame.width - (Assets.infobox.getWidth()) / 2), 600 ));
 
         }
         updatePosZero(0);

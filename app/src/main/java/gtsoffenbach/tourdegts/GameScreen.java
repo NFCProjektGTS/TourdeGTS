@@ -37,26 +37,11 @@ public class GameScreen extends Screen {
         this.currentLevel = level;
         bg1 = new Background(0,0);
         container = new ElementContainer(this, true);
-        /*gotoProgressButton = new UIButton(container, (AndroidGame.width - Assets.button.getWidth()) / 2,200) {
-            @Override
-            public void Click() {
-                super.Click();
-
-                //game.setScreen(new MathGameScreen(game));
-                game.setScreen(new ProgressScreen(game, currentLevel, currentLevel));
-                //game.setScreen(new ProgressScreen(game, currentLevel, currentLevel));
-            }
-        };*/
-        //gotoProgressButton.setGraphics(game.getGraphics());
-        //gotoProgresstext = new BlinkingText(gotoProgressButton, 0, 0, "Fortschritt", 70, Colors.LIGHT1, 1,Assets.gRoboto);
         gameprogressbar = new UIProgressbar(container,(AndroidGame.width - Assets.progressbar.getWidth()) / 2,177,40,new int[0],Colors.ALPHA33){
             @Override
             public void Click() {
                 super.Click();
                 game.setScreen(new ProgressScreen(game, currentLevel, currentLevel));
-                for(int i=0; i<SaveGame.levels.length;i++){
-                   SaveGame.levels[i].setUnlocked(true);
-                }
             }
         };
         gameprogressbar.setGraphics(game.getGraphics());
@@ -65,6 +50,15 @@ public class GameScreen extends Screen {
         textraum= new MultiLineBlinkingText(new UIElement(container, 100,630, 2, 2), 2, 2, SaveGame.levels[currentLevel].getRaum(), 50, Colors.BLACK, 1, Assets.gRoboto,1300);
         textlehrer= new MultiLineBlinkingText(new UIElement(container, 100,690, 2, 2), 2, 2, SaveGame.levels[currentLevel].getLehrer(), 50, Colors.BLACK, 1, Assets.gRoboto,1300);
         textinfo= new MultiLineBlinkingText(new UIElement(container, 100,760, 2, 2), 2, 2, SaveGame.levels[currentLevel].getInfo(),50, Colors.BLACK, 1, Assets.gRoboto,1300);
+        int unlocked =0;
+        for(int i = 0; i<SaveGame.levels.length;i++){
+            if(SaveGame.levels[i].isUnlocked()){
+                unlocked+=1;
+            }
+
+        }
+        System.out.println(unlocked+" UNLOCKED!!!!!!!!!");
+        gameprogressbar.setProgress((int)(((float)unlocked/(float)SaveGame.levels.length)*100));
         state = GameState.Running;
     }
 

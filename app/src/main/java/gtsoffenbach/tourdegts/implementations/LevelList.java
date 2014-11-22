@@ -11,14 +11,14 @@ public class LevelList {
 
 
     private static Level[] levels = {
-            new Level("Start","Start der Tour", "", "Foyer", "<lehrer>", 0, false),
-            new Level("Infostand / Empfang","Infostand und Empfang", "", "Foyer", "<lehrer>", 1, false),
-            new Level("DSF Info", "DSF Informationen", "Kreuzer", "Raum A016", "<lehrer>", 2, false),
-            new Level("Mechatronik","Mechatronik in der GTS", "Pevny", "Raum A105", "<lehrer>", 3, false),
-            new Level("Elektrische Schaltungen","Elektrische Schaltungen", "Hohm", "Raum A109", "<lehrer>", 4, false),
-            new Level("JavaScript Taschenrechner","JavaScript Taschenrechner", "Ostermann", "Raum A113", "<lehrer>", 5, false),
-            new Level("Industriemechaniker","Industrie- mechaniker", "Schneider", "Raum C201", "<lehrer>", 6, false),
-            new Level("Projektpräsentationen","Projekt- präsentationen", "Wendt, Lingnau", "Raum A209", "<lehrer>", 7, false)};
+            new Level("Start","Start der Tour", "Wähle die Prozentanzeige oben aus, um Informationen über ein nächstes Ziel der Tour zu bekommen.", "Foyer", "", 0, false),
+            new Level("Infostand / Empfang","Infostand und Empfang", "", "Foyer", "Frau Bickel", 1, false),
+            new Level("DSF Info", "DSF Informationen", "Kreuzer", "Raum A016", "Kreuzer", 2, false),
+            new Level("Mechatronik","Mechatronik an der GTS", "Kompetenzcheck zur Arbeit eines Mechatronikers mit Beispielen aus der Messtechnik und der Steuerungstechnik sollen die Schüler Einblicke in mechatronische Systeme bekommen.", "Raum A105", "Herr Pevny", 3, false),
+            new Level("Elektrische Schaltungen","Elektrische Schaltungen", "<beschreibung>", "Raum A109", "Herr Hohm", 4, false),
+            new Level("JavaScript Taschenrechner","JavaScript Taschenrechner", "Programmierung eines Taschenrechners in JavaScript", "Raum A113", "Herr Ostermann", 5, false),
+            new Level("Industriemechaniker","Industrie- mechaniker", "<beschreibung>", "Raum C201", "Herr Schneider", 6, false),
+            new Level("Projektpräsentationen","Projekt- präsentationen", "Prasentationen des Informatik Leistungskurses der Q3", "Raum A209", "Hr. Wendt, Fr. Lingau", 7, false)};
 
     LevelList() {
         //TODO SAVE

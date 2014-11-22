@@ -33,6 +33,8 @@ public class LoadingScreen extends Screen {
         Assets.button_small = g.newImage("button_small.png", ImageFormat.RGB565);
         Assets.button_small_pressed = g.newImage("button_small_pressed.png", ImageFormat.RGB565);
         Assets.progressbar = g.newImage("progressbar.png",ImageFormat.RGB565);
+        Assets.blankscreen = g.newImage("blankscreen.png",ImageFormat.RGB565);
+        Assets.nfcHand = g.newImage("nfchand_mid.png",ImageFormat.RGB565);
         game.setScreen(new MainMenuScreen(game));
     }
 

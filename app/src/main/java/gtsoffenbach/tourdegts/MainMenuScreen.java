@@ -1,11 +1,9 @@
 package gtsoffenbach.tourdegts;
 
-import android.graphics.Color;
 import android.widget.Toast;
 
 import java.util.List;
 
-import gtsoffenbach.tourdegts.ContentElement.WelcomeScreen;
 import gtsoffenbach.tourdegts.gameinterface.Game;
 import gtsoffenbach.tourdegts.gameinterface.Graphics;
 import gtsoffenbach.tourdegts.gameinterface.Input;
