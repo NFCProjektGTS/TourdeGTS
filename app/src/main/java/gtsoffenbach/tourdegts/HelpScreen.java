@@ -24,7 +24,7 @@ public class HelpScreen extends Screen {
 
         container = new ElementContainer(this, true);
 
-        backbutton = new UIButton(container, AndroidGame.width/2-Assets.button.getWidth()/2, AndroidGame.height-200) {
+        backbutton = new UIButton(container, AndroidGame.width / 2 - Assets.button.getWidth() / 2, AndroidGame.height - 200) {
             @Override
             public void Click() {
                 super.Click();
@@ -32,8 +32,8 @@ public class HelpScreen extends Screen {
             }
         };
         backbutton.setGraphics(game.getGraphics());
-        backtext = new BlinkingText(backbutton, 0, 0, "Zurück", 70, Color.WHITE, 1,Assets.gRoboto);
-        m = new MultiLineBlinkingText(new UIElement(container, 30,AndroidGame.height/3+Assets.nfcHand.getHeight()/2+100,2,2), 2, 2,"Halten sie ihr Handy an die Tour de GTS Symbole, welche in den Räumen angebracht sind, um Informationen zu erhalten.",60,Colors.BLACK,1,Assets.gRoboto,1500);
+        backtext = new BlinkingText(backbutton, 0, 0, "Zurück", 70, Color.WHITE, 1, Assets.gRoboto);
+        m = new MultiLineBlinkingText(new UIElement(container, 30, AndroidGame.height / 3 + Assets.nfcHand.getHeight() / 2 + 100, 2, 2), 2, 2, "Halten sie ihr Handy an die Tour de GTS Symbole, welche in den Räumen angebracht sind, um Informationen zu erhalten.", 60, Colors.BLACK, 1, Assets.gRoboto, 1500);
 
     }
 
@@ -48,8 +48,12 @@ public class HelpScreen extends Screen {
 
         int len = touchEvents.size();
         for (int i = 0; i < len; i++) {
-            Input.TouchEvent event = touchEvents.get(i);
-            container.processClick(event);
+            try {
+                Input.TouchEvent event = (Input.TouchEvent) touchEvents.get(i);
+                container.processClick(event);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -59,7 +63,7 @@ public class HelpScreen extends Screen {
         backtext.update(deltaTime);
         Graphics g = game.getGraphics();
         g.drawImage(Assets.helpBackground, 0, 0);
-        g.drawImage(Assets.nfcHand,AndroidGame.width/2-Assets.nfcHand.getWidth()/2, AndroidGame.height/3-Assets.nfcHand.getHeight()/2);
+        g.drawImage(Assets.nfcHand, AndroidGame.width / 2 - Assets.nfcHand.getWidth() / 2, AndroidGame.height / 3 - Assets.nfcHand.getHeight() / 2);
 
         container.updateAll(deltaTime, g);
 

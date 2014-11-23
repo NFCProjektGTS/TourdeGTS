@@ -1,15 +1,7 @@
 package gtsoffenbach.tourdegts;
 
-import android.graphics.Color;
-
 import java.util.List;
 
-import gtsoffenbach.tourdegts.Assets;
-import gtsoffenbach.tourdegts.Background;
-import gtsoffenbach.tourdegts.BlinkingText;
-import gtsoffenbach.tourdegts.Colors;
-import gtsoffenbach.tourdegts.ElementContainer;
-import gtsoffenbach.tourdegts.UIButton;
 import gtsoffenbach.tourdegts.gameinterface.Game;
 import gtsoffenbach.tourdegts.gameinterface.Graphics;
 import gtsoffenbach.tourdegts.gameinterface.Input;
@@ -71,8 +63,12 @@ public class WelcomeScreen extends Screen {
 
         int len = touchEvents.size();
         for (int i = 0; i < len; i++) {
-            Input.TouchEvent event = touchEvents.get(i);
-            container.processClick(event);
+            try {
+                Input.TouchEvent event = (Input.TouchEvent) touchEvents.get(i);
+                container.processClick(event);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

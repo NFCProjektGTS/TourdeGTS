@@ -11,7 +11,6 @@ import gtsoffenbach.tourdegts.gameinterface.Graphics;
 import gtsoffenbach.tourdegts.gameinterface.Input;
 import gtsoffenbach.tourdegts.gameinterface.Screen;
 import gtsoffenbach.tourdegts.implementations.AndroidGame;
-import gtsoffenbach.tourdegts.implementations.LevelList;
 import gtsoffenbach.tourdegts.implementations.SaveGame;
 
 /**
@@ -27,13 +26,13 @@ public class ProgressScreen extends Screen {
     private UIButton button;
     private Point last, now, veryfirst;
     private ArrayList<UIElement> buttons;
-    private boolean inMove;
+    private boolean inMove, dragged;
     private GameScreen lastscreen;
     private boolean locked;
     private Chest chest;
     private boolean ispop;
     private int mult = 1;
-    private int offset = 110;
+    private int offset = (AndroidGame.width - Assets.infobox.getWidth()) / 2;
     private String indicatorString, inverseindiString,infoString;
     private int wasdragged = 0;
 
@@ -158,12 +157,18 @@ public class ProgressScreen extends Screen {
         }
         Graphics g = game.getGraphics();
         List<Input.TouchEvent> touchEvents = game.getInput().getTouchEvents();
+
         if (!inMove && !locked) {
             int len = touchEvents.size();
 
             for (int i = 0; i < len; i++) {
-                Input.TouchEvent event = touchEvents.get(i);
-
+                Input.TouchEvent event;
+                try {
+                    event = touchEvents.get(i);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return;
+                }
                 container.processClick(event);
                 if (event.type == Input.TouchEvent.TOUCH_DOWN) {
                     veryfirst = last = new Point(event.x, event.y);
@@ -173,16 +178,24 @@ public class ProgressScreen extends Screen {
                     wasdragged++;
                     //System.out.println(wasdragged);
                     now = new Point(event.x, event.y);
-                    this.speed = (int) ((now.x - last.x));
+
+                    speed = now.x - last.x;
                     for (int i2 = 0; i2 < buttons.size(); i2++) {
                         buttons.get(i2).getRectangle().offsetTo(buttons.get(i2).getRectangle().left + speed, buttons.get(i2).getRectangle().top);
                     }
                     last = new Point(event.x, event.y);
+                    try {
+                        Thread.sleep(1);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
                 }
+
                 if (event.type == Input.TouchEvent.TOUCH_UP) {
 
                     if (wasdragged < 6) {
-                    if (event.x > 150 && event.x < 650 && event.y < 900 && event.y > 300) { //TODO NOTLÖSUNG?
+                        if (event.x > 150 && event.x < 650 && event.y < 900 && event.y > 300) { //TODO NOTLÖSUNG?
 
                         if (SaveGame.levels[selectedLevel].isUnlocked()) {
                             game.setScreen(new GameScreen(game, selectedLevel));
@@ -193,7 +206,7 @@ public class ProgressScreen extends Screen {
 
                     inMove = true;
                     int dist = (veryfirst.x - event.x);
-                    int trigger = (AndroidGame.width - Assets.button.getWidth());
+                    int trigger = (AndroidGame.width - Assets.infobox.getWidth());
                     if (selectedLevel == 0) {
                         if (dist < -trigger) {
 //BLOCK
@@ -244,10 +257,10 @@ public class ProgressScreen extends Screen {
 //int step = (int) Math.abs(buttons[selectedLevel].getRectangle().left)/1/deltaTime;
         int glitch = Math.abs(buttons.get(selectedLevel).getRectangle().left) == 0 ? 1 : Math.abs(buttons.get(selectedLevel).getRectangle().left);
         step = 50;//(int) Math.ceil(glitch / 1 / deltaTime);
-        if (buttons.get(selectedLevel).getRectangle().left > (AndroidGame.width - Assets.button.getWidth()) / 2) {
+        if (buttons.get(selectedLevel).getRectangle().left > (AndroidGame.width - Assets.infobox.getWidth()) / 2) {
 //buttons[selectedLevel].getRectangle().offsetTo(buttons[selectedLevel].getRectangle().left - step, buttons[selectedLevel].getRectangle().top);
-            if (buttons.get(selectedLevel).getRectangle().left - step < (AndroidGame.width - Assets.button.getWidth()) / 2) {
-                step = buttons.get(selectedLevel).getRectangle().left - (AndroidGame.width - Assets.button.getWidth()) / 2;
+            if (buttons.get(selectedLevel).getRectangle().left - step < (AndroidGame.width - Assets.infobox.getWidth()) / 2) {
+                step = buttons.get(selectedLevel).getRectangle().left - (AndroidGame.width - Assets.infobox.getWidth()) / 2;
             }
             for (int i2 = 0; i2 < buttons.size(); i2++) {
                 buttons.get(i2).getRectangle().offsetTo(buttons.get(i2).getRectangle().left - step, buttons.get(i2).getRectangle().top);
@@ -257,14 +270,14 @@ public class ProgressScreen extends Screen {
 /*if(buttons[selectedLevel].getRectangle().left<0){
 step = -step;
 }*/
-            if (buttons.get(selectedLevel).getRectangle().left + step > (AndroidGame.width - Assets.button.getWidth()) / 2) {
-                step = ((AndroidGame.width - Assets.button.getWidth()) / 2) - buttons.get(selectedLevel).getRectangle().left;
+            if (buttons.get(selectedLevel).getRectangle().left + step > (AndroidGame.width - Assets.infobox.getWidth()) / 2) {
+                step = ((AndroidGame.width - Assets.infobox.getWidth()) / 2) - buttons.get(selectedLevel).getRectangle().left;
             }
             for (int i2 = 0; i2 < buttons.size(); i2++) {
                 buttons.get(i2).getRectangle().offsetTo(buttons.get(i2).getRectangle().left + step, buttons.get(i2).getRectangle().top);
             }
         }
-        if (buttons.get(selectedLevel).getRectangle().left == (AndroidGame.width - Assets.button.getWidth()) / 2) {
+        if (buttons.get(selectedLevel).getRectangle().left == (AndroidGame.width - Assets.infobox.getWidth()) / 2) {
             inMove = false;
         }
     }

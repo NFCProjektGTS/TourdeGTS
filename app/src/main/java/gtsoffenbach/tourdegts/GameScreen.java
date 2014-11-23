@@ -1,20 +1,16 @@
 package gtsoffenbach.tourdegts;
 
 
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Rect;
 
 import java.util.List;
 
 import gtsoffenbach.tourdegts.gameinterface.Game;
 import gtsoffenbach.tourdegts.gameinterface.Graphics;
-import gtsoffenbach.tourdegts.gameinterface.Image;
 import gtsoffenbach.tourdegts.gameinterface.Input.TouchEvent;
 import gtsoffenbach.tourdegts.gameinterface.Screen;
 import gtsoffenbach.tourdegts.implementations.AndroidGame;
 import gtsoffenbach.tourdegts.implementations.SaveGame;
-import gtsoffenbach.tourdegts.minigame_math.MathGameScreen;
 
 /**
  * Created by Noli on 05.08.2014.
@@ -29,15 +25,15 @@ public class GameScreen extends Screen {
     private ElementContainer container;
     private UIButton gotoProgressButton;
     private int currentLevel;
-    private BlinkingText blink,textname,textraum,textlehrer;
+    private BlinkingText blink, textname, textraum, textlehrer;
     private MultiLineBlinkingText textinfo;
 
     public GameScreen(final Game game, int level) {
         super(game);
         this.currentLevel = level;
-        bg1 = new Background(0,0);
+        bg1 = new Background(0, 0);
         container = new ElementContainer(this, true);
-        gameprogressbar = new UIProgressbar(container,(AndroidGame.width - Assets.progressbar.getWidth()) / 2,177,40,new int[0],Colors.ALPHA33){
+        gameprogressbar = new UIProgressbar(container, (AndroidGame.width - Assets.progressbar.getWidth()) / 2, 177, 40, new int[0], Colors.ALPHA33) {
             @Override
             public void Click() {
                 super.Click();
@@ -45,20 +41,20 @@ public class GameScreen extends Screen {
             }
         };
         gameprogressbar.setGraphics(game.getGraphics());
-        blink = new BlinkingText(new UIElement(container, 35,20, 2, 2), 2, 2, "Tag: " + currentLevel, 30, Colors.RED, 1, Assets.standard);
-        textname= new MultiLineBlinkingText(new UIElement(container, 100,480, 2, 2), 2, 2, SaveGame.levels[currentLevel].getAnzeigeName(), 80, Colors.BLACK, 1, Assets.gRoboto,1300);
-        textraum= new MultiLineBlinkingText(new UIElement(container, 100,630, 2, 2), 2, 2, SaveGame.levels[currentLevel].getRaum(), 50, Colors.BLACK, 1, Assets.gRoboto,1300);
-        textlehrer= new MultiLineBlinkingText(new UIElement(container, 100,690, 2, 2), 2, 2, SaveGame.levels[currentLevel].getLehrer(), 50, Colors.BLACK, 1, Assets.gRoboto,1300);
-        textinfo= new MultiLineBlinkingText(new UIElement(container, 100,760, 2, 2), 2, 2, SaveGame.levels[currentLevel].getInfo(),50, Colors.BLACK, 1, Assets.gRoboto,1300);
-        int unlocked =0;
-        for(int i = 0; i<SaveGame.levels.length;i++){
-            if(SaveGame.levels[i].isUnlocked()){
-                unlocked+=1;
+        blink = new BlinkingText(new UIElement(container, 35, 20, 2, 2), 2, 2, "Tag: " + currentLevel, 30, Colors.RED, 1, Assets.standard);
+        textname = new MultiLineBlinkingText(new UIElement(container, 100, 480, 2, 2), 2, 2, SaveGame.levels[currentLevel].getAnzeigeName(), 80, Colors.BLACK, 1, Assets.gRoboto, 1300);
+        textraum = new MultiLineBlinkingText(new UIElement(container, 100, 630, 2, 2), 2, 2, SaveGame.levels[currentLevel].getRaum(), 50, Colors.BLACK, 1, Assets.gRoboto, 1300);
+        textlehrer = new MultiLineBlinkingText(new UIElement(container, 100, 690, 2, 2), 2, 2, SaveGame.levels[currentLevel].getLehrer(), 50, Colors.BLACK, 1, Assets.gRoboto, 1300);
+        textinfo = new MultiLineBlinkingText(new UIElement(container, 100, 760, 2, 2), 2, 2, SaveGame.levels[currentLevel].getInfo(), 50, Colors.BLACK, 1, Assets.gRoboto, 1300);
+        int unlocked = 0;
+        for (int i = 0; i < SaveGame.levels.length; i++) {
+            if (SaveGame.levels[i].isUnlocked()) {
+                unlocked += 1;
             }
 
         }
-        System.out.println(unlocked+" UNLOCKED!!!!!!!!!");
-        gameprogressbar.setProgress((int)(((float)unlocked/(float)SaveGame.levels.length)*100));
+        System.out.println(unlocked + " UNLOCKED!!!!!!!!!");
+        gameprogressbar.setProgress((int) (((float) unlocked / (float) SaveGame.levels.length) * 100));
         state = GameState.Running;
     }
 
@@ -78,8 +74,12 @@ public class GameScreen extends Screen {
     private void updateRunning(List touchEvents, float deltaTime) {
         int len = touchEvents.size();
         for (int i = 0; i < len; i++) {
-            TouchEvent event = (TouchEvent) touchEvents.get(i);
-            container.processClick(event);
+            try {
+                TouchEvent event = (TouchEvent) touchEvents.get(i);
+                container.processClick(event);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         bg1.update();
         animate();
@@ -106,7 +106,7 @@ public class GameScreen extends Screen {
     @Override
     public void paint(float deltaTime) {
         Graphics g = game.getGraphics();
-        g.drawImage(Assets.background, 0,0);
+        g.drawImage(Assets.background, 0, 0);
 //        gotoProgresstext.update(deltaTime);
         if (state == GameState.Running)
             drawRunningUI(deltaTime);
@@ -117,7 +117,6 @@ public class GameScreen extends Screen {
         //hanim.update(50);
         //chest_anim.update(50);
     }
-
 
 
     private void drawRunningUI(float deltaTime) {

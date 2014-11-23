@@ -1,6 +1,5 @@
 package gtsoffenbach.tourdegts;
 
-import gtsoffenbach.tourdegts.implementations.AndroidGame;
 import gtsoffenbach.tourdegts.implementations.Level;
 
 /**
@@ -25,12 +24,11 @@ public class LevelUIButton extends UIButton {
     public void draw(float delta) {
 
 
-
-        getGraphics().drawImage(Assets.infobox,  getRectangle().left -100 + AndroidGame.width/2 - Assets.infobox.getWidth()/2, getRectangle().top -50 - Assets.infobox.getHeight() / 2);
-        if(! level.isUnlocked()){
-            getGraphics().drawImage(Assets.lock,  getRectangle().left -100 +AndroidGame.width/2 - Assets.lock.getWidth()/2 , getRectangle().top - 50 - Assets.lock.getHeight() / 2);
-        }else {
-            getGraphics().drawImage(level.getImage(),  getRectangle().left -100 + AndroidGame.width/2 - level.getImage().getWidth()/2, getRectangle().top -50 - level.getImage().getHeight() / 2);
+        getGraphics().drawImage(Assets.infobox, getRectangle().left, getRectangle().top - Assets.infobox.getHeight() / 2);
+        if (!level.isUnlocked()) {
+            getGraphics().drawImage(Assets.lock, getRectangle().left + (Assets.infobox.getWidth() - Assets.lock.getWidth()) / 2, getRectangle().top - Assets.lock.getHeight() / 2);
+        } else {
+            getGraphics().drawImage(level.getImage(), getRectangle().left + (Assets.infobox.getWidth() - Assets.lock.getWidth()) / 2, getRectangle().top - level.getImage().getHeight() / 2);
         }
 
 

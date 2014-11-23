@@ -76,7 +76,7 @@ public abstract class NFC {
 
     public abstract byte[] rawTagData(Parcelable parc);
 
-    public abstract NdefMessage[] RawNDEFContent(Intent intent);
+    public abstract NdefMessage[] NoNDEFContent(Intent intent);
 
     public abstract void printTag(NdefMessage[] msgs);
 

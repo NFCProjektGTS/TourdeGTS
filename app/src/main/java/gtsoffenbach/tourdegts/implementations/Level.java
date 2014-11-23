@@ -1,16 +1,6 @@
 package gtsoffenbach.tourdegts.implementations;
 
 
-import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
-import android.widget.ImageView;
-
-import java.io.IOException;
-import java.io.InputStream;
-
-import gtsoffenbach.tourdegts.R;
 import gtsoffenbach.tourdegts.gameinterface.Image;
 
 /**
@@ -40,13 +30,12 @@ public class Level {
 
     }
 
-
+    public Image getImage() {
+        return levelPicture;
+    }
 
     public void setImage(Image value){
         levelPicture = value;
-    }
-    public Image getImage(){
-        return levelPicture;
     }
 
     public String getAnzeigeName() {
@@ -67,6 +56,7 @@ public class Level {
 
     public void setUnlocked(boolean unlocked) {
         this.unlocked = unlocked;
+
     }
 
     public String getName() {

@@ -92,8 +92,12 @@ public class MainMenuScreen extends Screen {
 
         int len = touchEvents.size();
         for (int i = 0; i < len; i++) {
-            Input.TouchEvent event = touchEvents.get(i);
-            container.processClick(event);
+            try {
+                Input.TouchEvent event = (Input.TouchEvent) touchEvents.get(i);
+                container.processClick(event);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

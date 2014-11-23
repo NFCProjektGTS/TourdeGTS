@@ -20,14 +20,14 @@ public class SettingsScreen extends Screen {
     public SettingsScreen(final Game game) {
         super(game);
         container = new ElementContainer(this, true);
-        button_back = new UIButton(container, AndroidGame.width/2-Assets.button.getWidth()/2, AndroidGame.height-200) {
+        button_back = new UIButton(container, AndroidGame.width / 2 - Assets.button.getWidth() / 2, AndroidGame.height - 200) {
             @Override
             public void Click() {
                 super.Click();
                 goToScreenMenu();
             }
         };
-        button_reset = new UIButton(container, AndroidGame.width/2-Assets.button.getWidth()/2, AndroidGame.height-400) {
+        button_reset = new UIButton(container, AndroidGame.width / 2 - Assets.button.getWidth() / 2, AndroidGame.height - 400) {
             @Override
             public void Click() {
                 super.Click();
@@ -37,8 +37,8 @@ public class SettingsScreen extends Screen {
                 //game.getSave().setNewGame(true);
             }
         };
-        new BlinkingText(button_reset, 0, 0, "Spiel zurücksetzen", 60, Color.WHITE, 1,Assets.gRoboto);
-        new BlinkingText(button_back, 0, 0, "Zurück", 60, Color.WHITE, 1,Assets.gRoboto);
+        new BlinkingText(button_reset, 0, 0, "Spiel zurücksetzen", 60, Color.WHITE, 1, Assets.gRoboto);
+        new BlinkingText(button_back, 0, 0, "Zurück", 60, Color.WHITE, 1, Assets.gRoboto);
     }
 
     private void goToScreenMenu() {
@@ -52,8 +52,12 @@ public class SettingsScreen extends Screen {
 
         int len = touchEvents.size();
         for (int i = 0; i < len; i++) {
-            Input.TouchEvent event = touchEvents.get(i);
-            container.processClick(event);
+            try {
+                Input.TouchEvent event = (Input.TouchEvent) touchEvents.get(i);
+                container.processClick(event);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
     }

@@ -96,7 +96,7 @@ public class GameNFC extends NFC {
                     msgs[i] = (NdefMessage) rawMsgs[i];
                 }
             } else {
-                msgs = RawNDEFContent(intent);
+                msgs = NoNDEFContent(intent);
             }
             mCurrentNdef = msgs;
             operate(mCurrentNdef);
@@ -160,7 +160,7 @@ public class GameNFC extends NFC {
     }
 
     @Override
-    public NdefMessage[] RawNDEFContent(Intent intent) {
+    public NdefMessage[] NoNDEFContent(Intent intent) {
         byte[] empty = new byte[0];
         byte[] id = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID);
         Parcelable tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
