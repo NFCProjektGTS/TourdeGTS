@@ -138,7 +138,7 @@ public class ProgressScreen extends Screen {
         if(SaveGame.levels[selectedLevel].isUnlocked()){
             infoString="Bild berühren für mehr Infos";
         }else{
-            infoString="im "+SaveGame.levels[selectedLevel].getRaum()+" freischaltbar";
+            infoString=SaveGame.levels[selectedLevel].getRaum()+" freischaltbar";
         }
 
         infotext.setMsg(infoString);
