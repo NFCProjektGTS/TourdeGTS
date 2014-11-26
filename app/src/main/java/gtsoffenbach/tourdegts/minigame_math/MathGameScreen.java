@@ -38,13 +38,13 @@ public class MathGameScreen extends Screen {
         mgl = new MathGameLogic(game, this);
         background = new Background(0, 0);
         container = new ElementContainer(this, true);
-        startTimer = new BlinkingText(new UIElement(container, AndroidGame.width / 2, AndroidGame.height / 2, 2, 2), 2, 2, "Timer", 350, Colors.BLACK, 1, Assets.lobster);
+        startTimer = new BlinkingText(new UIElement(container, AndroidGame.width / 2, AndroidGame.height / 2, 2, 2), 2, 2, "Timer", 350, Colors.RED, 1, Assets.lobster);
 
         noutofn = new BlinkingText(new UIElement(container, 50, 200, 233, 175), 2, 2, "0 / 0", 70, Colors.BLACK, 1, Assets.lobster);
         correctRate = new BlinkingText(new UIElement(container, 50 + 233, 200, 233, 175), 2, 2, "100%", 70, Colors.BLACK, 1, Assets.lobster);
         gameTimer = new BlinkingText(new UIElement(container, 50 + 466, 200, 233, 175), 2, 2, "30s", 70, Colors.BLACK, 1, Assets.lobster);
 
-        hint = new BlinkingText(new UIElement(container, AndroidGame.width / 2, -22, 0, 0), 2, 2, "", 100, Colors.BLACK, 1, Assets.standard);
+        hint = new BlinkingText(new UIElement(container, AndroidGame.width / 2, -22, 0, 0), 2, 2, "", 100, Colors.ALPHA50, 1, Assets.standard);
 
         endtext0 = new BlinkingText(new UIElement(container, AndroidGame.width / 2, AndroidGame.height / 2 - 300, 2, 2), 2, 2, "a", 150, Colors.BLACK, 1, Assets.lobster);
         endtext1 = new BlinkingText(new UIElement(container, AndroidGame.width / 2, AndroidGame.height / 2 - 150, 2, 2), 2, 2, "b", 150, Colors.GREEN, 1, Assets.lobster);
@@ -66,35 +66,35 @@ public class MathGameScreen extends Screen {
         };
         back.setEnabled(false);
         retry.setEnabled(false);
-        backtext = new BlinkingText(back, 0, 0, "Zurück", 100, Color.BLACK, 1, Assets.lobster);
-        retrytext = new BlinkingText(retry, 0, 0, "Nochmal", 100, Color.BLACK, 1, Assets.lobster);
+        backtext = new BlinkingText(back, 0, 0, "Zurück", 100, Color.WHITE, 1, Assets.gRoboto);
+        retrytext = new BlinkingText(retry, 0, 0, "Nochmal", 100, Color.WHITE, 1, Assets.gRoboto);
         back.setGraphics(game.getGraphics());
         retry.setGraphics(game.getGraphics());
 
 
-        job = new BlinkingText(new UIElement(container, 50, 400, 700, 350), 2, 2, "", 200, Colors.BLACK, 1, Assets.lobster);
-        res1 = new UIButton(container, 50, 800, 325, 200, "", Colors.BLUE) {
+        job = new BlinkingText(new UIElement(container, 50, 400, 700, 350), 2, 2, "", 200, Colors.RED, 1, Assets.lobster);
+        res1 = new UIButton(container, 50, 800, 325, 200, "", Colors.ALPHA50) {
             @Override
             public void Click() {
                 super.Click();
                 resultClicked(0);
             }
         };
-        res2 = new UIButton(container, 425, 800, 325, 200, "", Colors.BLUE) {
+        res2 = new UIButton(container, 425, 800, 325, 200, "", Colors.ALPHA50) {
             @Override
             public void Click() {
                 super.Click();
                 resultClicked(1);
             }
         };
-        res3 = new UIButton(container, 50, 1050, 325, 200, "", Colors.BLUE) {
+        res3 = new UIButton(container, 50, 1050, 325, 200, "", Colors.ALPHA50) {
             @Override
             public void Click() {
                 super.Click();
                 resultClicked(2);
             }
         };
-        res4 = new UIButton(container, 425, 1050, 325, 200, "", Colors.BLUE) {
+        res4 = new UIButton(container, 425, 1050, 325, 200, "", Colors.ALPHA50) {
             @Override
             public void Click() {
                 super.Click();
@@ -211,13 +211,13 @@ public class MathGameScreen extends Screen {
     @Override
     public void paint(float deltaTime) {
         Graphics g = game.getGraphics();
-        g.drawImage(Assets.background, background.getBgX(), background.getBgY());
+        g.drawImage(Assets.blankscreen, background.getBgX(), background.getBgY());
         if (mgl.isStarting) {
 
             noutofn.update(deltaTime);
             correctRate.update(deltaTime);
             gameTimer.update(deltaTime);
-            g.drawRect(50, 350, 700, 400, Colors.RED);
+            g.drawRect(50, 350, 700, 400, Colors.BLACK);
             res1.update(deltaTime);
             res2.update(deltaTime);
             res3.update(deltaTime);
@@ -227,7 +227,7 @@ public class MathGameScreen extends Screen {
 
         }
         if (mgl.isRunning) {
-            g.drawRect(50, 350, 700, 400, Colors.RED);
+            g.drawRect(50, 350, 700, 400, Colors.BLACK);
             noutofn.update(deltaTime);
             correctRate.update(deltaTime);
             gameTimer.update(deltaTime);
