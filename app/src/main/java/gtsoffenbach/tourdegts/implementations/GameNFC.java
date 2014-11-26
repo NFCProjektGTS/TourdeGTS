@@ -204,7 +204,25 @@ public class GameNFC extends NFC {
                         LevelUnlock.unlock(game, OpCode.NFC_UNLOCK_LEVEL_3);
                         break;
                     case OpCode.NFC_UNLOCK_LEVEL_4:
-                        //LevelUnlock.unlock(game, OpCode.NFC_UNLOCK_LEVEL_4);
+                        LevelUnlock.unlock(game, OpCode.NFC_UNLOCK_LEVEL_4);
+                        break;
+                    case OpCode.NFC_UNLOCK_LEVEL_5:
+                        LevelUnlock.unlock(game, OpCode.NFC_UNLOCK_LEVEL_5);
+                        break;
+                    case OpCode.NFC_UNLOCK_LEVEL_6:
+                        LevelUnlock.unlock(game, OpCode.NFC_UNLOCK_LEVEL_6);
+                        break;
+                    case OpCode.NFC_UNLOCK_LEVEL_7:
+                        LevelUnlock.unlock(game, OpCode.NFC_UNLOCK_LEVEL_7);
+                        break;
+                    case OpCode.NFC_UNLOCK_LEVEL_8:
+                        LevelUnlock.unlock(game, OpCode.NFC_UNLOCK_LEVEL_8);
+                        break;
+                    case OpCode.NFC_UNLOCK_LEVEL_9:
+                        LevelUnlock.unlock(game, OpCode.NFC_UNLOCK_LEVEL_9);
+                        break;
+                    case OpCode.NFC_UNLOCK_LEVEL_10:
+                        LevelUnlock.unlock(game, OpCode.NFC_UNLOCK_LEVEL_10);
                         break;
                     default:
                         System.out.print("Unrecognized format");
@@ -222,6 +240,12 @@ public class GameNFC extends NFC {
         public static final int NFC_UNLOCK_LEVEL_2 = 1;
         public static final int NFC_UNLOCK_LEVEL_3 = 2;
         public static final int NFC_UNLOCK_LEVEL_4 = 3;
+        public static final int NFC_UNLOCK_LEVEL_5 = 4;
+        public static final int NFC_UNLOCK_LEVEL_6 = 5;
+        public static final int NFC_UNLOCK_LEVEL_7 = 6;
+        public static final int NFC_UNLOCK_LEVEL_8 = 7;
+        public static final int NFC_UNLOCK_LEVEL_9 = 8;
+        public static final int NFC_UNLOCK_LEVEL_10 = 9;
 
     }
 
