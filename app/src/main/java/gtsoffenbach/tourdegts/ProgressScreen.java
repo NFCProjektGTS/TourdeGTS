@@ -66,7 +66,18 @@ public class ProgressScreen extends Screen {
 //TODO grafik der Buttons(Schlösser) überschreiben
         buttons = new ArrayList<UIElement>();
         for (int i = 0; i < SaveGame.levels.length; i++) {
-                buttons.add(new LevelUIButton(SaveGame.levels[i], container, i * AndroidGame.width + (AndroidGame.width - (Assets.infobox.getWidth()) / 2), 600 ));
+            buttons.add(new LevelUIButton(SaveGame.levels[i], container, i * AndroidGame.width + (AndroidGame.width - (Assets.infobox.getWidth()) / 2), 600) {
+                @Override
+                public void Click() {
+                    if (dragged) {
+                        if (SaveGame.levels[selectedLevel].isUnlocked()) {
+                            SaveGame.setLastlevel(selectedLevel);
+                            game.setScreen(new GameScreen(game, selectedLevel));
+                        }
+                    }
+
+                }
+            });
 
         }
         updatePosZero(0);
