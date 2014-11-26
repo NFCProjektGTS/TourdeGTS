@@ -96,12 +96,12 @@ public class ProgressScreen extends Screen {
         this.chest = chest;
     }
 
-    public void loadChest(GameScreen last) {
+    public void loadChest(int last) {
 //this.chest = new Chest(new UIElement(container,AndroidGame.width/2 - Assets.chest[0].getWidth()/2, 50, Assets.chest[0].getWidth(), Assets.chest[0].getHeight()), Assets.chest[0].getWidth(), Assets.chest[0].getHeight(), 700, 5000);
         this.chest = new Chest(new UIElement(container, (AndroidGame.width - Assets.chest[0].getWidth()) / 2, AndroidGame.height - Assets.chest[0].getHeight(), Assets.chest[0].getWidth(), Assets.chest[0].getHeight()), Assets.chest[0].getWidth(), Assets.chest[0].getHeight(), 700, 5000);
         this.chest.setGraphics(game.getGraphics());
         this.step = 65;
-        this.lastscreen = last;
+        this.lastscreen = new GameScreen(game, last);
         this.locked = true;
     }
 
