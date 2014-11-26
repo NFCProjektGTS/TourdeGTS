@@ -11,13 +11,13 @@ public class LevelList {
 
 
     private static Level[] levels = {
-            new Level("Start","Start der Tour", "Wähle die Prozentanzeige oben aus, um Informationen über ein nächstes Ziel der Tour zu bekommen.", "im Foyer", "", 0, false),
+            new Level("Start","Start der Tour", "Wähle die Prozentanzeige oben aus, um Informationen über ein nächstes Ziel der Tour zu bekommen.", "im Foyer", "", 0, true),
             new Level("Infostand / Empfang","Infostand und Empfang", "Empfang am Hauteingang mit Informationen und Flyer über die Schule.", "im Foyer", "Frau Bickel", 1, false),
             new Level("DSF Info", "DSF Informationen", "Hier gibt es Informationen zur DSF", "in Raum A016", "Kreuzer", 2, false),
             new Level("Mechatronik","Mechatronik an der GTS", "Kompetenzcheck zur Arbeit eines Mechatronikers mit Beispielen aus der Messtechnik und der Steuerungstechnik sollen die Schüler Einblicke in mechatronische Systeme bekommen.", "in Raum A105", "Herr Pevny", 3, false),
             new Level("Elektrische Schaltungen","Elektrische Schaltungen", "<beschreibung>", "in Raum A109", "Herr Hohm", 4, false),
             new Level("Mathe im BG","Mathe im Beruflichen Gymnasium", "Vorstellung der Themen die in der Oberstufe unterrichtet werden. Mit unteranderem einem kleinen Kenntnis Test im Bereich Mathe und der Vorstellung von Geogebra.", "Raum A109", "Herr Hohm",5, false),
-            new Level("Mathe Minigame","Mathe Minigame", "", "in Raum A203", "",999, false),
+            new Level("Mathe Minigame","Mathe Minigame", "", "in Raum A203", "",10, false),
             new Level("JavaScript Taschenrechner","JavaScript Taschenrechner", "Programmierung eines Taschenrechners in JavaScript der z.B. Berechnungen, wie Addieren oder Nullstellenfindung, im Browser ausführt.", "in Raum A113", "Herr Ostermann",6, false),
             new Level("Industriemechaniker","Industrie- mechaniker", "<beschreibung>", "in Raum C201", "Herr Schneider", 7, false),
             new Level("Sport","Sportangebot an der GTS", "Es ist eine Slackline Aufgebaut und Schüler Präsentationen über den Ski- und Snowboardkurs.", "in der Sporthalle", "Frau Nubert", 8, false),
