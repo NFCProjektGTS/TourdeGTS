@@ -28,7 +28,7 @@ public class LevelUIButton extends UIButton {
         if (!level.isUnlocked()) {
             getGraphics().drawImage(Assets.lock, getRectangle().left + (Assets.infobox.getWidth() - Assets.lock.getWidth()) / 2, getRectangle().top - Assets.lock.getHeight() / 2);
         } else {
-            getGraphics().drawImage(level.getImage(), getRectangle().left + (Assets.infobox.getWidth() - Assets.lock.getWidth()) / 2, getRectangle().top - level.getImage().getHeight() / 2);
+            getGraphics().drawImage(level.getImage(), getRectangle().left + (Assets.infobox.getWidth() - level.getImage().getWidth()) / 2, getRectangle().top - level.getImage().getHeight() / 2);
         }
 
 
