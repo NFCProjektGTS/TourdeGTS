@@ -15,6 +15,7 @@ public class SaveGame {
     public static boolean newGame = true;
 
     public static Level[] levels = LevelList.getLevels();
+    private static int lastlevel = 0;
     private Context caller;
     private FileOutputStream fos;
     private FileInputStream fis;
@@ -22,6 +23,14 @@ public class SaveGame {
 
     SaveGame(Context caller) {
         this.caller = caller;
+    }
+
+    public static int getLastlevel() {
+        return lastlevel;
+    }
+
+    public static void setLastlevel(int lastlevel) {
+        SaveGame.lastlevel = lastlevel;
     }
 
     public static boolean isNewGame() {
@@ -68,7 +77,14 @@ public class SaveGame {
         if (content != "" && content != null) {
             //Load from file
             String[] parts = content.split("#");
-            for (int i = 0; i < parts.length; i++) {
+            try {
+                lastlevel = Integer.valueOf(parts[0]);
+            } catch (NumberFormatException e) {
+                delete();
+                loadGame();
+                return;
+            }
+            for (int i = 1; i < parts.length; i++) {
                 String[] set = parts[i].split(",");
                 if (set[1].equals("1")) {
                     levels[Integer.valueOf(set[0])].setUnlocked(true);
@@ -84,6 +100,7 @@ public class SaveGame {
     public void save() {
 
         StringBuilder sb = new StringBuilder();
+        sb.append(lastlevel).append("#");
         for (int i = 0; i < levels.length; i++) {
             if (i == levels.length - 1) {
                 sb.append(levels[i].getLevelnumber()).append(",").append(levels[i].isUnlocked() ? 1 : 0);

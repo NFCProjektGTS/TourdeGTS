@@ -20,7 +20,7 @@ public class LoadingScreen extends Screen {
         Graphics g = game.getGraphics();
         LevelList.init(g);
         Assets.menu = g.newImage("mainmenu.png", ImageFormat.RGB565);
-        Assets.background = g.newImage("gamescreen.png", ImageFormat.RGB565);
+        Assets.background = g.newImage("blankscreen.png", ImageFormat.RGB565);
         Assets.lock = g.newImage("lock.png", ImageFormat.RGB565);
         Assets.infobox = g.newImage("infobox.png", ImageFormat.RGB565);
         Assets.button = g.newImage("button.png", ImageFormat.RGB565);

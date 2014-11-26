@@ -18,17 +18,18 @@ public class HelpScreen extends Screen {
     private UIElement backbutton;
     private BlinkingText backtext;
     private MultiLineBlinkingText m;
+    private Screen lastscreen;
 
     public HelpScreen(Game game) {
         super(game);
-
+        lastscreen = game.getCurrentScreen();
         container = new ElementContainer(this, true);
 
         backbutton = new UIButton(container, AndroidGame.width / 2 - Assets.button.getWidth() / 2, AndroidGame.height - 200) {
             @Override
             public void Click() {
                 super.Click();
-                goToScreenMenu();
+                goToLastScreen();
             }
         };
         backbutton.setGraphics(game.getGraphics());
@@ -37,8 +38,8 @@ public class HelpScreen extends Screen {
 
     }
 
-    private void goToScreenMenu() {
-        game.setScreen(new MainMenuScreen(game));
+    private void goToLastScreen() {
+        game.setScreen(lastscreen);
     }
 
     @Override
@@ -86,6 +87,6 @@ public class HelpScreen extends Screen {
 
     @Override
     public void backButton() {
-
+        goToLastScreen();
     }
 }

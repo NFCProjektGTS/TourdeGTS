@@ -175,15 +175,16 @@ public class ProgressScreen extends Screen {
 
                 }
                 if (event.type == Input.TouchEvent.TOUCH_DRAGGED) {
-                    wasdragged++;
+                    //wasdragged++;
                     //System.out.println(wasdragged);
                     now = new Point(event.x, event.y);
-
+                    if (Math.sqrt(Math.pow(now.x - last.x, 2) + Math.pow(now.y - last.y, 2)) > 10)
+                        dragged = true;
                     speed = now.x - last.x;
                     for (int i2 = 0; i2 < buttons.size(); i2++) {
                         buttons.get(i2).getRectangle().offsetTo(buttons.get(i2).getRectangle().left + speed, buttons.get(i2).getRectangle().top);
                     }
-                    last = new Point(event.x, event.y);
+
                     try {
                         Thread.sleep(1);
                     } catch (InterruptedException e) {
@@ -194,16 +195,10 @@ public class ProgressScreen extends Screen {
 
                 if (event.type == Input.TouchEvent.TOUCH_UP) {
 
-                    if (wasdragged < 6) {
-                        if (event.x > 150 && event.x < 650 && event.y < 900 && event.y > 300) { //TODO NOTLÖSUNG?
+                    //if (wasdragged < 6) {
 
-                        if (SaveGame.levels[selectedLevel].isUnlocked()) {
-                            game.setScreen(new GameScreen(game, selectedLevel));
-                        }
-                    }
-                    }
-                    wasdragged = 0;
-
+                    //wasdragged = 0;
+                    dragged = false;
                     inMove = true;
                     int dist = (veryfirst.x - event.x);
                     int trigger = (AndroidGame.width - Assets.infobox.getWidth());
@@ -246,7 +241,18 @@ public class ProgressScreen extends Screen {
 //BLOCK
                         }
                     }
+
+                    if (dragged) {
+                        if (event.x > 150 && event.x < 650 && event.y < 900 && event.y > 300) { //TODO NOTLÖSUNG?
+
+                            if (SaveGame.levels[selectedLevel].isUnlocked()) {
+                                SaveGame.setLastlevel(selectedLevel);
+                                game.setScreen(new GameScreen(game, selectedLevel));
+                            }
+                        }
+                    }
                 }
+                last = new Point(event.x, event.y);
             }
         } //else {
             updatePosZero(deltaTime);

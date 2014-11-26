@@ -58,6 +58,13 @@ public class GameScreen extends Screen {
         state = GameState.Running;
     }
 
+    public int getCurrentLevel() {
+        return currentLevel;
+    }
+
+    public void setCurrentLevel(int currentLevel) {
+        this.currentLevel = currentLevel;
+    }
 
     @Override
     public void update(float deltaTime) {

@@ -19,7 +19,6 @@ public class MainMenuScreen extends Screen {
     BlinkingText start, help, settings;
     boolean backonce;
     private ElementContainer container;
-    private int levelselected = 0;
 
 
     public MainMenuScreen(Game game) {
@@ -81,7 +80,7 @@ public class MainMenuScreen extends Screen {
         if (SaveGame.isNewGame()) {       //ADDED WELCOMESCREEN ON FIRST STARTUP
             game.setScreen(new WelcomeScreen(game));
         } else {
-            game.setScreen(new GameScreen(game, levelselected));
+            game.setScreen(new GameScreen(game, SaveGame.getLastlevel()));
         }
     }
 
