@@ -10,13 +10,14 @@ public class LevelUnlock {
 
 
     public static void unlock(Game game, int level) {
-        //GameScreen lastscreen = (GameScreen) game.getCurrentScreen();
-        SaveGame.levels[level].setUnlocked(true);
-        game.getSave().save();
-        ProgressScreen unlockscreen = new ProgressScreen(game, 0, level);
-        game.setScreen(unlockscreen);
-        unlockscreen.loadChest(level);
-
+        if (!SaveGame.levels[level].isUnlocked()) {
+            //GameScreen lastscreen = (GameScreen) game.getCurrentScreen();
+            SaveGame.levels[level].setUnlocked(true);
+            game.getSave().save();
+            ProgressScreen unlockscreen = new ProgressScreen(game, 0, level);
+            game.setScreen(unlockscreen);
+            unlockscreen.loadChest(level);
+        }
         //game.setScreen(lastscreen);
     }
 
