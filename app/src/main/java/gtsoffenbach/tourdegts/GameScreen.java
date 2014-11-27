@@ -67,8 +67,14 @@ public class GameScreen extends Screen {
             }
 
         }
-        // if((int) (((float) unlocked / (float) SaveGame.levels.length) * 100)>60&&!SaveGame.levels[10].isUnlocked()){
-        //    SaveGame.levels[10].setUnlocked(true);
+         if((int) (((float) unlocked / (float) SaveGame.levels.length) * 100)>60&&!SaveGame.levels[10].isUnlocked()){
+             SaveGame.levels[10].setUnlocked(true);
+             for (int i = 0; i < SaveGame.levels.length; i++) {
+                 if (SaveGame.levels[i].isUnlocked()) {
+                     unlocked += 1;
+                 }
+             }
+        }
 
         //}
         System.out.println(unlocked + " UNLOCKED!!!!!!!!!");
