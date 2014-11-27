@@ -36,10 +36,10 @@ public class LevelList {
        levels[3].setImage(g.newImage("mechatronik.png", Graphics.ImageFormat.RGB565));
        levels[4].setImage(g.newImage("elektrischeSchaltung.png", Graphics.ImageFormat.RGB565));
        levels[5].setImage(g.newImage("grundkursmathe.png", Graphics.ImageFormat.RGB565));
-       levels[6].setImage(g.newImage("projektpraesentation.png", Graphics.ImageFormat.RGB565));
-       levels[7].setImage(g.newImage("rechnerJavaSkript.png", Graphics.ImageFormat.RGB565));
-       levels[8].setImage(g.newImage("industriemechaniker.png", Graphics.ImageFormat.RGB565));
-       levels[9].setImage(g.newImage("sport.png", Graphics.ImageFormat.RGB565));
+       levels[6].setImage(g.newImage("rechnerJavaSkript.png", Graphics.ImageFormat.RGB565));
+       levels[7].setImage(g.newImage("industriemechaniker.png", Graphics.ImageFormat.RGB565));
+       levels[8].setImage(g.newImage("sport.png", Graphics.ImageFormat.RGB565));
+       levels[9].setImage(g.newImage("projektpraesentation.png", Graphics.ImageFormat.RGB565));
        levels[10].setImage(g.newImage("matheapp.png", Graphics.ImageFormat.RGB565));
     }
 
