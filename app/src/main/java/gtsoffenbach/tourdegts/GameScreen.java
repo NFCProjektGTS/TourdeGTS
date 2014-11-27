@@ -25,7 +25,7 @@ public class GameScreen extends Screen {
     private ElementContainer container;
     private UIButton gotoProgressButton;
     private int currentLevel;
-    private BlinkingText blink, textname, textraum, textlehrer;
+    private BlinkingText textname, textraum, textlehrer;
     private MultiLineBlinkingText textinfo;
 
     public GameScreen(final Game game, int level) {
@@ -41,7 +41,7 @@ public class GameScreen extends Screen {
             }
         };
         gameprogressbar.setGraphics(game.getGraphics());
-        blink = new BlinkingText(new UIElement(container, 35, 20, 2, 2), 2, 2, "Tag: " + currentLevel, 30, Colors.RED, 1, Assets.standard);
+
         textname = new MultiLineBlinkingText(new UIElement(container, 100, 480, 2, 2), 2, 2, SaveGame.levels[currentLevel].getAnzeigeName(), 80, Colors.BLACK, 1, Assets.gRoboto, 1300);
         textraum = new MultiLineBlinkingText(new UIElement(container, 100, 630, 2, 2), 2, 2, SaveGame.levels[currentLevel].getRaum(), 50, Colors.BLACK, 1, Assets.gRoboto, 1300);
         textlehrer = new MultiLineBlinkingText(new UIElement(container, 100, 690, 2, 2), 2, 2, SaveGame.levels[currentLevel].getLehrer(), 50, Colors.BLACK, 1, Assets.gRoboto, 1300);
@@ -53,7 +53,11 @@ public class GameScreen extends Screen {
             }
 
         }
+        if((int) (((float) unlocked / (float) SaveGame.levels.length) * 100)>60&&!SaveGame.levels[10].isUnlocked()){
+            SaveGame.levels[10].setUnlocked(true);
+        }
         System.out.println(unlocked + " UNLOCKED!!!!!!!!!");
+
         gameprogressbar.setProgress((int) (((float) unlocked / (float) SaveGame.levels.length) * 100));
         state = GameState.Running;
     }

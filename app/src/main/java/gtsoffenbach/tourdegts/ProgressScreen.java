@@ -58,10 +58,10 @@ public class ProgressScreen extends Screen {
         }
 
         this.container = new ElementContainer(this, true);
-        invIndicator = new BlinkingText(new UIElement(container, (AndroidGame.width / 2), 940, 0, 0), 0, 0,  inverseindiString, 150, Color.RED, 1,Assets.standard);
-        indicator = new BlinkingText(new UIElement(container, (AndroidGame.width / 2), 940, 0, 0), 0, 0,  indicatorString, 150, Color.BLACK, 1,Assets.standard);
-        levelname = new BlinkingText(new UIElement(container, (AndroidGame.width / 2), 1050, 0, 0), 0, 0, SaveGame.levels[0].getName(), 60, Color.BLACK, 1,Assets.gRoboto);
-        infotext = new BlinkingText(new UIElement(container, (AndroidGame.width / 2), 1120, 0, 0), 0, 0, "info hier", 40, Color.BLACK, 1,Assets.gRoboto);
+        invIndicator = new BlinkingText(new UIElement(container, (AndroidGame.width / 2), 940, 0, 0), 0, 0,  inverseindiString, 150, Colors.RED, 1,Assets.gRoboto);
+        indicator = new BlinkingText(new UIElement(container, (AndroidGame.width / 2), 940, 0, 0), 0, 0,  indicatorString, 150, Colors.BLACK, 1,Assets.gRoboto);
+        levelname = new BlinkingText(new UIElement(container, (AndroidGame.width / 2), 1050, 0, 0), 0, 0, SaveGame.levels[0].getName(), 60, Colors.BLACK, 1,Assets.gRoboto);
+        infotext = new BlinkingText(new UIElement(container, (AndroidGame.width / 2), 1120, 0, 0), 0, 0, "info hier", 40, Colors.BLACK, 1,Assets.gRoboto);
 //TODO alle gleichrücken
 //TODO grafik der Buttons(Schlösser) überschreiben
         buttons = new ArrayList<UIElement>();
@@ -109,7 +109,7 @@ public class ProgressScreen extends Screen {
 
     public void loadChest(int last) {
 //this.chest = new Chest(new UIElement(container,AndroidGame.width/2 - Assets.chest[0].getWidth()/2, 50, Assets.chest[0].getWidth(), Assets.chest[0].getHeight()), Assets.chest[0].getWidth(), Assets.chest[0].getHeight(), 700, 5000);
-        this.chest = new Chest(new UIElement(container, (AndroidGame.width - Assets.chest[0].getWidth()) / 2, AndroidGame.height - Assets.chest[0].getHeight(), Assets.chest[0].getWidth(), Assets.chest[0].getHeight()), Assets.chest[0].getWidth(), Assets.chest[0].getHeight(), 700, 5000);
+        this.chest = new Chest(new UIElement(container, (AndroidGame.width - Assets.chest[0].getWidth()) / 2, AndroidGame.height - Assets.chest[0].getHeight(), Assets.chest[0].getWidth(), Assets.chest[0].getHeight()), Assets.chest[0].getWidth(), Assets.chest[0].getHeight(), 700, 2000);
         this.chest.setGraphics(game.getGraphics());
         this.step = 65;
         this.lastscreen = new GameScreen(game, last);
