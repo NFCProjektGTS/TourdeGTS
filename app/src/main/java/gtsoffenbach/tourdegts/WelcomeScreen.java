@@ -36,15 +36,16 @@ public class WelcomeScreen extends Screen {
             @Override
             public void Click() {
                 super.Click();
+                goButton.setEnabled(false);
+                //fadeOut(container);
                 game.setScreen(new HelpScreen(game));
-
-                fadeOut(container);
             }
         };
         goButton = new UIButton(container, (AndroidGame.width - Assets.button.getWidth()) / 2, AndroidGame.height - Assets.button.getHeight() - 20) {
             @Override
             public void Click() {
                 super.Click();
+
                 fadeOut(container);
             }
         };
@@ -79,6 +80,7 @@ public class WelcomeScreen extends Screen {
 
         container.updateAll(deltaTime, g);
 
+
     }
 
     @Override
@@ -87,7 +89,7 @@ public class WelcomeScreen extends Screen {
     }
     @Override
     public void resume() {
-
+        goButton.setEnabled(true);
     }
 
     @Override

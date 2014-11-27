@@ -180,8 +180,10 @@ public class UIElement {
                         container.bringToForeground(this);
                     }
                     if (event.type == Input.TouchEvent.TOUCH_UP) {
+                        if (!pressed) {
+                            Click();
+                        }
                         pressed = true;
-                        Click();
                     }
                     if (event.type == Input.TouchEvent.TOUCH_DOWN) {
                         pressed = false;

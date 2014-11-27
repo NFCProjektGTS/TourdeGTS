@@ -80,6 +80,7 @@ public class MainMenuScreen extends Screen {
         if (SaveGame.isNewGame()) {       //ADDED WELCOMESCREEN ON FIRST STARTUP
             game.setScreen(new WelcomeScreen(game));
         } else {
+            int lv = SaveGame.getLastlevel();
             game.setScreen(new GameScreen(game, SaveGame.getLastlevel()));
         }
     }

@@ -99,4 +99,12 @@ public class SingleTouchHandler implements TouchHandler {
             return touchEvents;
         }
     }
+
+    @Override
+    public void killEvent(TouchEvent event) {
+        touchEvents.remove(event);
+        touchEventPool.free(event);
+
+        touchEventsBuffer.remove(event);
+    }
 }

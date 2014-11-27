@@ -11,6 +11,7 @@ import gtsoffenbach.tourdegts.gameinterface.Input.TouchEvent;
 import gtsoffenbach.tourdegts.gameinterface.Screen;
 import gtsoffenbach.tourdegts.implementations.AndroidGame;
 import gtsoffenbach.tourdegts.implementations.SaveGame;
+import gtsoffenbach.tourdegts.minigame_math.MathGameScreen;
 
 /**
  * Created by Noli on 05.08.2014.
@@ -31,6 +32,7 @@ public class GameScreen extends Screen {
     public GameScreen(final Game game, int level) {
         super(game);
         this.currentLevel = level;
+
         bg1 = new Background(0, 0);
         container = new ElementContainer(this, true);
         gameprogressbar = new UIProgressbar(container, (AndroidGame.width - Assets.progressbar.getWidth()) / 2, 177, 40, new int[0], Colors.ALPHA33) {
@@ -46,6 +48,18 @@ public class GameScreen extends Screen {
         textraum = new MultiLineBlinkingText(new UIElement(container, 100, 630, 2, 2), 2, 2, SaveGame.levels[currentLevel].getRaum(), 50, Colors.BLACK, 1, Assets.gRoboto, 1300);
         textlehrer = new MultiLineBlinkingText(new UIElement(container, 100, 690, 2, 2), 2, 2, SaveGame.levels[currentLevel].getLehrer(), 50, Colors.BLACK, 1, Assets.gRoboto, 1300);
         textinfo = new MultiLineBlinkingText(new UIElement(container, 100, 760, 2, 2), 2, 2, SaveGame.levels[currentLevel].getInfo(), 50, Colors.BLACK, 1, Assets.gRoboto, 1300);
+
+        if (currentLevel == 10) {
+            final MultiLineBlinkingText start = new MultiLineBlinkingText(new UIElement(container, 150, 880, 2, 2), 2, 2, "Tap to start!", 50, Colors.BLACK, 0.7, Assets.gRoboto, 1300);
+            UIElement tapspace = new UIElement(container, 0, 300, AndroidGame.width, AndroidGame.height - 300) {
+                @Override
+                public void Click() {
+
+                    game.setScreen(new MathGameScreen(game));
+                }
+            };
+        }
+
         int unlocked = 0;
         for (int i = 0; i < SaveGame.levels.length; i++) {
             if (SaveGame.levels[i].isUnlocked()) {
@@ -53,9 +67,10 @@ public class GameScreen extends Screen {
             }
 
         }
-        if((int) (((float) unlocked / (float) SaveGame.levels.length) * 100)>60&&!SaveGame.levels[10].isUnlocked()){
+        // if((int) (((float) unlocked / (float) SaveGame.levels.length) * 100)>60&&!SaveGame.levels[10].isUnlocked()){
             SaveGame.levels[10].setUnlocked(true);
-        }
+
+        //}
         System.out.println(unlocked + " UNLOCKED!!!!!!!!!");
 
         gameprogressbar.setProgress((int) (((float) unlocked / (float) SaveGame.levels.length) * 100));

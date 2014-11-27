@@ -39,6 +39,7 @@ public class HelpScreen extends Screen {
     }
 
     private void goToLastScreen() {
+        lastscreen.resume();
         game.setScreen(lastscreen);
     }
 

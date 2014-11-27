@@ -14,6 +14,7 @@ import android.os.Parcelable;
 import android.util.Log;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 
 import gtsoffenbach.tourdegts.Utils;
 import gtsoffenbach.tourdegts.gameinterface.NFC;
@@ -188,14 +189,22 @@ public class GameNFC extends NFC {
     @Override
     public void operate(NdefMessage[] msgs) {
         //TODO unlock game content on operation
+        byte[] payload = {103, 116, 115, 111, 102, 102, 101, 110, 98, 97, 99, 104, 46, 116, 111, 117, 114, 100, 101, 103, 116, 115}; // = gtsoffenbach.tourdegts
         for (NdefMessage ms : msgs) {
             for (NdefRecord rec : ms.getRecords()) {
+                if (Arrays.equals(rec.getPayload(), payload)) {
+                    System.out.println("Starttag found");
+                    LevelUnlock.unlock(game, OpCode.NFC_UNLOCK_LEVEL_1);
+                }
+
+
                 switch (new BigInteger(rec.getType()).intValue()) {
                     //case OpCode.NFC_INITIAL_TAG:
                     //not in prototype
                     //    break;
                     case OpCode.NFC_UNLOCK_LEVEL_1:
-                        LevelUnlock.unlock(game, OpCode.NFC_UNLOCK_LEVEL_1);
+                        // LevelUnlock.unlock(game, OpCode.NFC_UNLOCK_LEVEL_1);
+                        // there is no more unlockfunction neccessary for Level 1 hence it is unlocked with the difunctional starttag!
                         break;
                     case OpCode.NFC_UNLOCK_LEVEL_2:
                         LevelUnlock.unlock(game, OpCode.NFC_UNLOCK_LEVEL_2);

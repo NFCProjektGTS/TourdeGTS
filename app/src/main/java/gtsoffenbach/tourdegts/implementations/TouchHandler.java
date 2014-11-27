@@ -19,4 +19,6 @@ public interface TouchHandler extends OnTouchListener {
     public int getTouchY(int pointer);
 
     public List<Input.TouchEvent> getTouchEvents();
+
+    public void killEvent(Input.TouchEvent event);
 }

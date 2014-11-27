@@ -27,6 +27,7 @@ public class MultiTouchHandler implements TouchHandler {
     float scaleX;
     float scaleY;
 
+
     public MultiTouchHandler(View view, float scaleX, float scaleY) {
         PoolObjectFactory<TouchEvent> factory = new PoolObjectFactory<TouchEvent>() {
             @Override
@@ -156,5 +157,13 @@ public class MultiTouchHandler implements TouchHandler {
             }
         }
         return -1;
+    }
+
+    @Override
+    public void killEvent(TouchEvent event) {
+        touchEvents.remove(event);
+        touchEventPool.free(event);
+
+        touchEventsBuffer.remove(event);
     }
 }

@@ -1,6 +1,5 @@
 package gtsoffenbach.tourdegts;
 
-import android.graphics.Color;
 import android.graphics.Point;
 
 import java.util.ArrayList;
@@ -35,6 +34,7 @@ public class ProgressScreen extends Screen {
     private int offset = (AndroidGame.width - Assets.infobox.getWidth()) / 2;
     private String indicatorString, inverseindiString,infoString;
     private int wasdragged = 0;
+    private boolean finger;
 
     public ProgressScreen(final Game game, int lastlevel, int seleted) { //NEED SELECTED LEVEL
         super(game);
@@ -55,6 +55,7 @@ public class ProgressScreen extends Screen {
             this.selectedLevel = 0;
         } else {
             this.selectedLevel = seleted;
+            step = 150;
         }
 
         this.container = new ElementContainer(this, true);
@@ -67,7 +68,7 @@ public class ProgressScreen extends Screen {
         buttons = new ArrayList<UIElement>();
         for (int i = 0; i < SaveGame.levels.length; i++) {
             buttons.add(new LevelUIButton(SaveGame.levels[i], container, i * AndroidGame.width + (AndroidGame.width - (Assets.infobox.getWidth()) / 2), 600) {
-                @Override
+                /*@Override
                 public void Click() {
                     if (dragged) {
                         if (SaveGame.levels[selectedLevel].isUnlocked()) {
@@ -76,7 +77,7 @@ public class ProgressScreen extends Screen {
                         }
                     }
 
-                }
+                }*/
             });
 
         }
@@ -183,6 +184,7 @@ public class ProgressScreen extends Screen {
                 container.processClick(event);
                 if (event.type == Input.TouchEvent.TOUCH_DOWN) {
                     veryfirst = last = new Point(event.x, event.y);
+                    finger = true;
 
                 }
                 if (event.type == Input.TouchEvent.TOUCH_DRAGGED) {
@@ -205,6 +207,17 @@ public class ProgressScreen extends Screen {
                 }
 
                 if (event.type == Input.TouchEvent.TOUCH_UP) {
+                    finger = false;
+                    if (!dragged && !inMove) {
+                        if (event.x > 150 && event.x < 650 && event.y < 900 && event.y > 300) { //TODO NOTLÖSUNG?
+
+                            if (SaveGame.levels[selectedLevel].isUnlocked()) {
+                                SaveGame.setLastlevel(selectedLevel);
+                                game.getSave().save();
+                                game.setScreen(new GameScreen(game, selectedLevel));
+                            }
+                        }
+                    }
 
                     //if (wasdragged < 6) {
 
@@ -253,15 +266,7 @@ public class ProgressScreen extends Screen {
                         }
                     }
 
-                    if (dragged) {
-                        if (event.x > 150 && event.x < 650 && event.y < 900 && event.y > 300) { //TODO NOTLÖSUNG?
 
-                            if (SaveGame.levels[selectedLevel].isUnlocked()) {
-                                SaveGame.setLastlevel(selectedLevel);
-                                game.setScreen(new GameScreen(game, selectedLevel));
-                            }
-                        }
-                    }
                 }
                 last = new Point(event.x, event.y);
             }
@@ -271,31 +276,34 @@ public class ProgressScreen extends Screen {
     }
 
     private void updatePosZero(float deltaTime) {
+        if (!finger) {
+            inMove = true;
 //int step = (int) Math.abs(buttons[selectedLevel].getRectangle().left)/1/deltaTime;
-        int glitch = Math.abs(buttons.get(selectedLevel).getRectangle().left) == 0 ? 1 : Math.abs(buttons.get(selectedLevel).getRectangle().left);
-        step = 50;//(int) Math.ceil(glitch / 1 / deltaTime);
-        if (buttons.get(selectedLevel).getRectangle().left > (AndroidGame.width - Assets.infobox.getWidth()) / 2) {
+            int glitch = Math.abs(buttons.get(selectedLevel).getRectangle().left) == 0 ? 1 : Math.abs(buttons.get(selectedLevel).getRectangle().left);
+            step = 50;//(int) Math.ceil(glitch / 1 / deltaTime);
+            if (buttons.get(selectedLevel).getRectangle().left > (AndroidGame.width - Assets.infobox.getWidth()) / 2) {
 //buttons[selectedLevel].getRectangle().offsetTo(buttons[selectedLevel].getRectangle().left - step, buttons[selectedLevel].getRectangle().top);
-            if (buttons.get(selectedLevel).getRectangle().left - step < (AndroidGame.width - Assets.infobox.getWidth()) / 2) {
-                step = buttons.get(selectedLevel).getRectangle().left - (AndroidGame.width - Assets.infobox.getWidth()) / 2;
-            }
-            for (int i2 = 0; i2 < buttons.size(); i2++) {
-                buttons.get(i2).getRectangle().offsetTo(buttons.get(i2).getRectangle().left - step, buttons.get(i2).getRectangle().top);
-            }
-        } else {
+                if (buttons.get(selectedLevel).getRectangle().left - step < (AndroidGame.width - Assets.infobox.getWidth()) / 2) {
+                    step = buttons.get(selectedLevel).getRectangle().left - (AndroidGame.width - Assets.infobox.getWidth()) / 2;
+                }
+                for (int i2 = 0; i2 < buttons.size(); i2++) {
+                    buttons.get(i2).getRectangle().offsetTo(buttons.get(i2).getRectangle().left - step, buttons.get(i2).getRectangle().top);
+                }
+            } else {
 //buttons[selectedLevel].getRectangle().offsetTo(buttons[selectedLevel].getRectangle().left + step, buttons[selectedLevel].getRectangle().top);
 /*if(buttons[selectedLevel].getRectangle().left<0){
 step = -step;
 }*/
-            if (buttons.get(selectedLevel).getRectangle().left + step > (AndroidGame.width - Assets.infobox.getWidth()) / 2) {
-                step = ((AndroidGame.width - Assets.infobox.getWidth()) / 2) - buttons.get(selectedLevel).getRectangle().left;
+                if (buttons.get(selectedLevel).getRectangle().left + step > (AndroidGame.width - Assets.infobox.getWidth()) / 2) {
+                    step = ((AndroidGame.width - Assets.infobox.getWidth()) / 2) - buttons.get(selectedLevel).getRectangle().left;
+                }
+                for (int i2 = 0; i2 < buttons.size(); i2++) {
+                    buttons.get(i2).getRectangle().offsetTo(buttons.get(i2).getRectangle().left + step, buttons.get(i2).getRectangle().top);
+                }
             }
-            for (int i2 = 0; i2 < buttons.size(); i2++) {
-                buttons.get(i2).getRectangle().offsetTo(buttons.get(i2).getRectangle().left + step, buttons.get(i2).getRectangle().top);
+            if (buttons.get(selectedLevel).getRectangle().left == (AndroidGame.width - Assets.infobox.getWidth()) / 2) {
+                inMove = false;
             }
-        }
-        if (buttons.get(selectedLevel).getRectangle().left == (AndroidGame.width - Assets.infobox.getWidth()) / 2) {
-            inMove = false;
         }
     }
 
