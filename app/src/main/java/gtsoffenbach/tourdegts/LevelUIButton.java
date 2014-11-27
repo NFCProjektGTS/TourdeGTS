@@ -17,7 +17,6 @@ public class LevelUIButton extends UIButton {
     @Override
     public void Click() {
         //game.setScreen(new GameScreen(game, selectedLevel));
-        System.out.println("Click");
     }
 
     @Override
