@@ -30,7 +30,7 @@ public class WelcomeScreen extends Screen {
         container = new ElementContainer(this, true);
         m1 = new MultiLineBlinkingText(new UIElement(container, 30,AndroidGame.height/4+90,2,2), 2, 2,"Herzlich Willkommen zur",65,Colors.BLACK,1,Assets.gRoboto,1500);
         m2 = new MultiLineBlinkingText(new UIElement(container, 30,AndroidGame.height/4+90+150,2,2), 2, 2,"   Tour de GTS",120,Colors.RED,1,Assets.lobster,2000);
-        m3 = new MultiLineBlinkingText(new UIElement(container, 30,AndroidGame.height/4+90+420,2,2), 2, 2,"  Wissen sie wie gespielt wird?",50,Colors.BLACK,1,Assets.gRoboto,1600);
+        m3 = new MultiLineBlinkingText(new UIElement(container, 30, AndroidGame.height / 4 + 90 + 420, 2, 2), 2, 2, "  Wissen Sie wie gespielt wird?", 50, Colors.BLACK, 1, Assets.gRoboto, 1600);
 
         helpButton = new UIButton(container, (AndroidGame.width - Assets.button.getWidth()) / 2, AndroidGame.height - Assets.button.getHeight() - 220) {
             @Override

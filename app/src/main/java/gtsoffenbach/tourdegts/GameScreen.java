@@ -68,7 +68,7 @@ public class GameScreen extends Screen {
 
         }
         // if((int) (((float) unlocked / (float) SaveGame.levels.length) * 100)>60&&!SaveGame.levels[10].isUnlocked()){
-            SaveGame.levels[10].setUnlocked(true);
+        //    SaveGame.levels[10].setUnlocked(true);
 
         //}
         System.out.println(unlocked + " UNLOCKED!!!!!!!!!");

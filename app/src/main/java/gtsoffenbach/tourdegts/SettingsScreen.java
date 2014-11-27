@@ -9,6 +9,7 @@ import gtsoffenbach.tourdegts.gameinterface.Graphics;
 import gtsoffenbach.tourdegts.gameinterface.Input;
 import gtsoffenbach.tourdegts.gameinterface.Screen;
 import gtsoffenbach.tourdegts.implementations.AndroidGame;
+import gtsoffenbach.tourdegts.implementations.SaveGame;
 
 /**
  * Created by Kern on 04.09.2014.
@@ -32,6 +33,7 @@ public class SettingsScreen extends Screen {
             public void Click() {
                 super.Click();
                 game.getSave().delete();
+                SaveGame.setLastlevel(0);
                 game.setScreen(new LoadingScreen(game));
                 //game.getSave().loadGame();
                 //game.getSave().setNewGame(true);
