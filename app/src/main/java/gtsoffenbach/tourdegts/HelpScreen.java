@@ -34,7 +34,7 @@ public class HelpScreen extends Screen {
         };
         backbutton.setGraphics(game.getGraphics());
         backtext = new BlinkingText(backbutton, 0, 0, "Zurück", 70, Color.WHITE, 1, Assets.gRoboto);
-        m = new MultiLineBlinkingText(new UIElement(container, 30, AndroidGame.height / 3 + Assets.nfcHand.getHeight() / 2 + 100, 2, 2), 2, 2, "Halten sie ihr Handy an die Tour de GTS Symbole, welche in den Räumen angebracht sind, um Informationen zu erhalten.", 60, Colors.BLACK, 1, Assets.gRoboto, 1500);
+        m = new MultiLineBlinkingText(new UIElement(container, 60, AndroidGame.height / 3 + Assets.nfcHand.getHeight() / 2 + 100, 2, 2), 2, 2, "Halten sie ihr Handy an die Tour de GTS Symbole, welche in den Räumen angebracht sind, um Informationen zu erhalten.", 60, Colors.BLACK, 1, Assets.gRoboto, 1440);
 
     }
 

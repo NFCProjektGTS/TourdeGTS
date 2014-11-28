@@ -35,10 +35,10 @@ public class ProgressScreen extends Screen {
     private String indicatorString, inverseindiString,infoString;
     private int wasdragged = 0;
     private boolean finger;
+    private boolean zero;
 
     public ProgressScreen(final Game game, int lastlevel, int seleted) { //NEED SELECTED LEVEL
         super(game);
-
         for(int i = 0;i<SaveGame.levels.length;i++){
             if(i==selectedLevel){
                 indicatorString = indicatorString + " ";
@@ -110,9 +110,9 @@ public class ProgressScreen extends Screen {
 
     public void loadChest(int last) {
 //this.chest = new Chest(new UIElement(container,AndroidGame.width/2 - Assets.chest[0].getWidth()/2, 50, Assets.chest[0].getWidth(), Assets.chest[0].getHeight()), Assets.chest[0].getWidth(), Assets.chest[0].getHeight(), 700, 5000);
-        this.chest = new Chest(new UIElement(container, (AndroidGame.width - Assets.chest[0].getWidth()) / 2, AndroidGame.height - Assets.chest[0].getHeight(), Assets.chest[0].getWidth(), Assets.chest[0].getHeight()), Assets.chest[0].getWidth(), Assets.chest[0].getHeight(), 700, 2000);
+        this.chest = new Chest(new UIElement(container, (AndroidGame.width - Assets.chest[0].getWidth()) / 2, AndroidGame.height - Assets.chest[0].getHeight(), Assets.chest[0].getWidth(), Assets.chest[0].getHeight()), Assets.chest[0].getWidth(), Assets.chest[0].getHeight(), 450, 2500);
         this.chest.setGraphics(game.getGraphics());
-        this.step = 65;
+        this.step = 75;
         this.lastscreen = new GameScreen(game, last);
         this.locked = true;
     }
@@ -157,20 +157,22 @@ public class ProgressScreen extends Screen {
         invIndicator.setMsg(inverseindiString);
         indicator.setMsg(indicatorString);
             if (chest != null) {
-            if (chest.getChest_anim().isEnd()) {
+                if (chest.getChest_anim().isEnd() && zero) {
                 chest.dismiss();
                 try {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                    this.dispose();
                 game.setScreen(lastscreen);
             }
         }
         Graphics g = game.getGraphics();
         List<Input.TouchEvent> touchEvents = game.getInput().getTouchEvents();
 
-        if (!inMove && !locked) {
+        //if (!inMove && !locked) {
+        if (!locked) {
             int len = touchEvents.size();
 
             for (int i = 0; i < len; i++) {
@@ -188,6 +190,7 @@ public class ProgressScreen extends Screen {
 
                 }
                 if (event.type == Input.TouchEvent.TOUCH_DRAGGED) {
+                    finger = true;
                     //wasdragged++;
                     //System.out.println(wasdragged);
                     now = new Point(event.x, event.y);
@@ -196,6 +199,7 @@ public class ProgressScreen extends Screen {
                     speed = now.x - last.x;
                     for (int i2 = 0; i2 < buttons.size(); i2++) {
                         buttons.get(i2).getRectangle().offsetTo(buttons.get(i2).getRectangle().left + speed, buttons.get(i2).getRectangle().top);
+                        //inMove = true;
                     }
 
                     try {
@@ -208,7 +212,8 @@ public class ProgressScreen extends Screen {
 
                 if (event.type == Input.TouchEvent.TOUCH_UP) {
                     finger = false;
-                    if (!dragged && !inMove) {
+                    // if (!dragged && !inMove) {
+                    if (!dragged) {
                         if (event.x > 150 && event.x < 650 && event.y < 900 && event.y > 300) { //TODO NOTLÖSUNG?
 
                             if (SaveGame.levels[selectedLevel].isUnlocked()) {
@@ -223,7 +228,7 @@ public class ProgressScreen extends Screen {
 
                     //wasdragged = 0;
                     dragged = false;
-                    inMove = true;
+
                     int dist = (veryfirst.x - event.x);
                     int trigger = (AndroidGame.width - Assets.infobox.getWidth());
                     if (selectedLevel == 0) {
@@ -277,7 +282,8 @@ public class ProgressScreen extends Screen {
 
     private void updatePosZero(float deltaTime) {
         if (!finger) {
-            inMove = true;
+            zero = false;
+            //inMove = true;
 //int step = (int) Math.abs(buttons[selectedLevel].getRectangle().left)/1/deltaTime;
             int glitch = Math.abs(buttons.get(selectedLevel).getRectangle().left) == 0 ? 1 : Math.abs(buttons.get(selectedLevel).getRectangle().left);
             step = 50;//(int) Math.ceil(glitch / 1 / deltaTime);
@@ -302,8 +308,11 @@ step = -step;
                 }
             }
             if (buttons.get(selectedLevel).getRectangle().left == (AndroidGame.width - Assets.infobox.getWidth()) / 2) {
-                inMove = false;
+                // inMove = false;
+                zero = true;
+
             }
+
         }
     }
 
@@ -321,7 +330,12 @@ step = -step;
 
     @Override
     public void backButton() {
-        if (!locked)
-            game.setScreen(new GameScreen(game, lastLevel));
+        if (!locked && SaveGame.levels[selectedLevel].isUnlocked()) {
+            SaveGame.setLastlevel(selectedLevel);
+            game.getSave().save();
+
+            game.setScreen(new GameScreen(game, selectedLevel));
+        }
+        game.setScreen(new GameScreen(game, lastLevel));
     }
 }

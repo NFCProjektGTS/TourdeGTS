@@ -46,6 +46,7 @@ public class SaveGame {
             save();
         }*/
 
+
         try {
             //fos = caller.openFileOutput(path, Context.MODE_PRIVATE);
             fis = caller.openFileInput(path);
@@ -56,8 +57,19 @@ public class SaveGame {
             return;
         }
 
+        newGame = true;
+        if (SaveGame.levels[0].isUnlocked()) {
+            newGame = false;
+        }
 
-        newGame = false;
+
+        int le = 0;
+        for (Level l : SaveGame.levels) {
+            le = l.isUnlocked() ? le + 1 : le;
+        }
+        if (le > 0) newGame = false;
+
+
         int n;
         StringBuffer fileContent = new StringBuffer("");
         try {

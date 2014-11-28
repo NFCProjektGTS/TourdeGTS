@@ -36,24 +36,24 @@ public class WelcomeScreen extends Screen {
             @Override
             public void Click() {
                 super.Click();
-                goButton.setEnabled(false);
+                //goButton.setEnabled(false);
                 //fadeOut(container);
                 game.setScreen(new HelpScreen(game));
             }
         };
-        goButton = new UIButton(container, (AndroidGame.width - Assets.button.getWidth()) / 2, AndroidGame.height - Assets.button.getHeight() - 20) {
+      /*  goButton = new UIButton(container, (AndroidGame.width - Assets.button.getWidth()) / 2, AndroidGame.height - Assets.button.getHeight() - 20) {
             @Override
             public void Click() {
                 super.Click();
 
                 fadeOut(container);
             }
-        };
-        goButton.setGraphics(game.getGraphics());
-        gotext = new BlinkingText(goButton, 0, 0, "weiter", 60, Colors.LIGHT1, 1, Assets.gRoboto);
+        };*/
+
+        //goButton.setGraphics(game.getGraphics());
+        //gotext = new BlinkingText(goButton, 0, 0, "weiter", 60, Colors.LIGHT1, 1, Assets.gRoboto);
         helptext = new BlinkingText(helpButton, 0, 0, "zur Hilfe", 60, Colors.LIGHT1, 1, Assets.gRoboto);
         fadeIn(container);
-
 
     }
 
@@ -89,7 +89,7 @@ public class WelcomeScreen extends Screen {
     }
     @Override
     public void resume() {
-        goButton.setEnabled(true);
+        //if(!goButton.isEnabled())goButton.setEnabled(true);
     }
 
     @Override
@@ -99,6 +99,8 @@ public class WelcomeScreen extends Screen {
 
     @Override
     public void backButton() {
+        //fadeOut(container);
 
+        game.setScreen(new MainMenuScreen(game));
     }
 }

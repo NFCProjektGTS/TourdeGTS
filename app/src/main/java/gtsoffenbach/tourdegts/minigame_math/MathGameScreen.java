@@ -274,6 +274,8 @@ public class MathGameScreen extends Screen {
 
     @Override
     public void backButton() {
-        game.setScreen(new GameScreen(game, 10));
+        GameScreen gs = new GameScreen(game, 10);
+        gs.pause();
+        game.setScreen(gs);
     }
 }

@@ -40,9 +40,14 @@ public class ElementContainer {
 
     public void updateAll(float delta, Graphics graphics) {
         if (enabled) {
+            try {
             for (UIElement element : elements) {
                 element.setGraphics(graphics);
                 element.update(delta);
+            }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return;
             }
         }
     }

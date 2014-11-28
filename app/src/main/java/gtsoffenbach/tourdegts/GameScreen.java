@@ -28,6 +28,7 @@ public class GameScreen extends Screen {
     private int currentLevel;
     private BlinkingText textname, textraum, textlehrer;
     private MultiLineBlinkingText textinfo;
+    private UIElement tapspace;
 
     public GameScreen(final Game game, int level) {
         super(game);
@@ -50,8 +51,8 @@ public class GameScreen extends Screen {
         textinfo = new MultiLineBlinkingText(new UIElement(container, 100, 760, 2, 2), 2, 2, SaveGame.levels[currentLevel].getInfo(), 50, Colors.BLACK, 1, Assets.gRoboto, 1300);
 
         if (currentLevel == 10) {
-            final MultiLineBlinkingText start = new MultiLineBlinkingText(new UIElement(container, 150, 880, 2, 2), 2, 2, "Tap to start!", 50, Colors.BLACK, 0.7, Assets.gRoboto, 1300);
-            UIElement tapspace = new UIElement(container, 0, 300, AndroidGame.width, AndroidGame.height - 300) {
+            BlinkingText start = new BlinkingText(new UIElement(container, 150, 880, 2, 2), 2, 2, "Tap to start!", 50, Colors.BLACK, 0.7, Assets.gRoboto);
+            tapspace = new UIElement(container, 0, 300, AndroidGame.width, AndroidGame.height - 300) {
                 @Override
                 public void Click() {
 
@@ -63,18 +64,16 @@ public class GameScreen extends Screen {
         int unlocked = 0;
         for (int i = 0; i < SaveGame.levels.length; i++) {
             if (SaveGame.levels[i].isUnlocked()) {
-                unlocked += 1;
+                unlocked++;
             }
 
         }
-         if((int) (((float) unlocked / (float) SaveGame.levels.length) * 100)>60&&!SaveGame.levels[10].isUnlocked()){
+
+        if((int) (((float) unlocked / (float) SaveGame.levels.length) * 100)>60&&!SaveGame.levels[10].isUnlocked()){
              SaveGame.levels[10].setUnlocked(true);
-             for (int i = 0; i < SaveGame.levels.length; i++) {
-                 if (SaveGame.levels[i].isUnlocked()) {
-                     unlocked += 1;
-                 }
-             }
+            unlocked++;
         }
+
 
         //}
         System.out.println(unlocked + " UNLOCKED!!!!!!!!!");
@@ -159,6 +158,10 @@ public class GameScreen extends Screen {
 
     @Override
     public void pause() {
+        if (container != null) {
+            container.setEnabled(false);
+        }
+        ;
         if (state == GameState.Running)
             state = GameState.Paused;
 
@@ -170,6 +173,10 @@ public class GameScreen extends Screen {
 
     @Override
     public void resume() {
+        if (container != null) {
+            container.setEnabled(true);
+        }
+        ;
         if (state == GameState.Paused)
             state = GameState.Running;
     }
@@ -184,6 +191,8 @@ public class GameScreen extends Screen {
     }
 
     private void goToMenu() {
+        SaveGame.setLastlevel(currentLevel);
+        game.getSave().save();
         game.setScreen(new MainMenuScreen(game));
     }
 

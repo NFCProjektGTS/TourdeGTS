@@ -32,8 +32,9 @@ public class SettingsScreen extends Screen {
             @Override
             public void Click() {
                 super.Click();
-                game.getSave().delete();
                 SaveGame.setLastlevel(0);
+                //game.getSave().save();
+                game.getSave().delete();
                 game.setScreen(new LoadingScreen(game));
                 //game.getSave().loadGame();
                 //game.getSave().setNewGame(true);

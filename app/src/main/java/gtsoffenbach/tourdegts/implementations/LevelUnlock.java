@@ -13,6 +13,7 @@ public class LevelUnlock {
         if (!SaveGame.levels[level].isUnlocked()) {
             //GameScreen lastscreen = (GameScreen) game.getCurrentScreen();
             SaveGame.levels[level].setUnlocked(true);
+            SaveGame.setLastlevel(level);
             game.getSave().save();
             ProgressScreen unlockscreen = new ProgressScreen(game, 0, level);
             game.setScreen(unlockscreen);

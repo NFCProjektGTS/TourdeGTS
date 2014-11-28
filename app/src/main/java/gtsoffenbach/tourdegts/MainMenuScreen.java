@@ -23,6 +23,7 @@ public class MainMenuScreen extends Screen {
 
     public MainMenuScreen(Game game) {
         super(game);
+        game.getSave().loadGame();
         container = new ElementContainer(this, true);
 
         button_start = new UIButton(container, AndroidGame.width / 2 - Assets.button.getWidth() / 2, 500) {
@@ -78,6 +79,7 @@ public class MainMenuScreen extends Screen {
     private void goToScreenGame() {
 
         if (SaveGame.isNewGame()) {       //ADDED WELCOMESCREEN ON FIRST STARTUP
+
             game.setScreen(new WelcomeScreen(game));
         } else {
             int lv = SaveGame.getLastlevel();

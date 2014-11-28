@@ -255,7 +255,6 @@ public class GameNFC extends NFC {
         public static final int NFC_UNLOCK_LEVEL_8 = 7;
         public static final int NFC_UNLOCK_LEVEL_9 = 8;
         public static final int NFC_UNLOCK_LEVEL_10 = 9;
-
     }
 
     ;
