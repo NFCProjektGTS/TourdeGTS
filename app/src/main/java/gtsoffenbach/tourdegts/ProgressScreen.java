@@ -150,8 +150,12 @@ public class ProgressScreen extends Screen {
             }
         }
 
+        if(SaveGame.levels[selectedLevel].isUnlocked()){
+            infotext.setMsg("Bild berühren für Infos");
+        }else{
+            infotext.setMsg(SaveGame.levels[selectedLevel].getRaum()+" freischaltbar");
+        }
 
-       // infotext.setMsg(infoString);
 
             if (chest != null) {
                 if (chest.getChest_anim().isEnd() && zero) {
