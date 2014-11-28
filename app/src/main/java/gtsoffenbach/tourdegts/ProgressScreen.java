@@ -17,7 +17,7 @@ import gtsoffenbach.tourdegts.implementations.SaveGame;
  */
 public class ProgressScreen extends Screen {
     int step;
-    BlinkingText levelname,indicator,invIndicator,infotext;
+    private BlinkingText levelname,infotext;
     private int lastLevel;
     private int selectedLevel;
     private ElementContainer container;
@@ -32,23 +32,13 @@ public class ProgressScreen extends Screen {
     private boolean ispop;
     private int mult = 1;
     private int offset = (AndroidGame.width - Assets.infobox.getWidth()) / 2;
-    private String indicatorString, inverseindiString,infoString;
-    private int wasdragged = 0;
+    private int lastselecetedLevel = selectedLevel;
     private boolean finger;
     private boolean zero;
+    private ArrayList<BlinkingText> a;
 
     public ProgressScreen(final Game game, int lastlevel, int seleted) { //NEED SELECTED LEVEL
         super(game);
-        for(int i = 0;i<SaveGame.levels.length;i++){
-            if(i==selectedLevel){
-                indicatorString = indicatorString + " ";
-                inverseindiString = inverseindiString + ".";
-            }else{
-                indicatorString = indicatorString + ".";
-                inverseindiString = inverseindiString + " ";
-            }
-
-        }
         this.lastLevel = lastlevel;
         this.inMove = false;
         if (seleted <= 0) {
@@ -59,10 +49,22 @@ public class ProgressScreen extends Screen {
         }
 
         this.container = new ElementContainer(this, true);
-        invIndicator = new BlinkingText(new UIElement(container, (AndroidGame.width / 2), 940, 0, 0), 0, 0,  inverseindiString, 150, Colors.RED, 1,Assets.gRoboto);
-        indicator = new BlinkingText(new UIElement(container, (AndroidGame.width / 2), 940, 0, 0), 0, 0,  indicatorString, 150, Colors.BLACK, 1,Assets.gRoboto);
-        levelname = new BlinkingText(new UIElement(container, (AndroidGame.width / 2), 1050, 0, 0), 0, 0, SaveGame.levels[0].getName(), 60, Colors.BLACK, 1,Assets.gRoboto);
-        infotext = new BlinkingText(new UIElement(container, (AndroidGame.width / 2), 1120, 0, 0), 0, 0, "info hier", 40, Colors.BLACK, 1,Assets.gRoboto);
+       levelname = new BlinkingText(new UIElement(container, (AndroidGame.width / 2), 1050, 0, 0), 0, 0, SaveGame.levels[selectedLevel].getName(), 60, Colors.BLACK, 1,Assets.gRoboto);
+       infotext = new BlinkingText(new UIElement(container, (AndroidGame.width / 2), 1120, 0, 0), 0, 0, "info hier", 40, Colors.BLACK, 1,Assets.gRoboto);
+
+         a = new ArrayList<BlinkingText>();
+        for(int o = 0;o<SaveGame.levels.length;o++) {
+            if(selectedLevel==o){
+                a.add(new BlinkingText(new UIElement(container, (AndroidGame.width / 2)-SaveGame.levels.length*15+(o*30), 940, 0, 0), 0, 0, ".", 150, Colors.RED, 1,Assets.gRoboto));
+            }else {
+                a.add(new BlinkingText(new UIElement(container, (AndroidGame.width / 2)-SaveGame.levels.length*15+(o*30), 940, 0, 0), 0, 0, ".", 150, Colors.BLACK, 1,Assets.gRoboto));
+            }
+
+        }
+
+
+
+
 //TODO alle gleichrücken
 //TODO grafik der Buttons(Schlösser) überschreiben
         buttons = new ArrayList<UIElement>();
@@ -135,27 +137,22 @@ public class ProgressScreen extends Screen {
     @Override
     public void update(float deltaTime) {
         levelname.setMsg(SaveGame.levels[selectedLevel].getName());
-        inverseindiString="";
-        indicatorString="";
-        for(int o = 0;o<SaveGame.levels.length;o++) {
-            if (o == selectedLevel) {
-                indicatorString = indicatorString + " ";
-                inverseindiString = inverseindiString + ".";
-            } else {
-                indicatorString = indicatorString + ".";
-                inverseindiString = inverseindiString + " ";
+        if(selectedLevel!=lastselecetedLevel){
+            lastselecetedLevel=selectedLevel;
+            a = new ArrayList<BlinkingText>();
+            for(int o = 0;o<SaveGame.levels.length;o++) {
+                if(selectedLevel==o){
+                    a.add(new BlinkingText(new UIElement(container, (AndroidGame.width / 2)-SaveGame.levels.length*15+(o*30), 940, 0, 0), 0, 0, ".", 150, Colors.RED, 1,Assets.gRoboto));
+                }else {
+                    a.add(new BlinkingText(new UIElement(container, (AndroidGame.width / 2)-SaveGame.levels.length*15+(o*30), 940, 0, 0), 0, 0, ".", 150, Colors.BLACK, 1,Assets.gRoboto));
+                }
+
             }
-
-        }
-        if(SaveGame.levels[selectedLevel].isUnlocked()){
-            infoString="Bild berühren für mehr Infos";
-        }else{
-            infoString=SaveGame.levels[selectedLevel].getRaum()+" freischaltbar";
         }
 
-        infotext.setMsg(infoString);
-        invIndicator.setMsg(inverseindiString);
-        indicator.setMsg(indicatorString);
+
+       // infotext.setMsg(infoString);
+
             if (chest != null) {
                 if (chest.getChest_anim().isEnd() && zero) {
                 chest.dismiss();
